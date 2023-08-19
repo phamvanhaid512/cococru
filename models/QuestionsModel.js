@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const { sequelize } = require('../config/config.js');
+const { sequelize }  = require('./index.js')
 const QuestionsModule = sequelize.define("questions", {
   question: {
     type: DataTypes.STRING
