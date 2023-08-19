@@ -1,34 +1,26 @@
 const { QuestionsData } = require('../Data/praprices')
 const asyncHandler = require("express-async-handler");
 const Questions = require('../models/QuestionsModel.js');
-
 exports.getAllQuesstions = asyncHandler(async (req, res) => {
-  try {
-    res.json("Pham vanhai");
-
-  } catch (error) {
-
-  }
+    res.json("api get test");
 });
-//Create questions
+//Create questions get from File DATA
 
 exports.CreateQuestions = asyncHandler(async (req, res) => {
   console.log("chay đến đây");
   try {
     await Questions.destroy({ truncate: true }); // Xóa tất cả dữ liệu trong bảng
     // Sau đó, bạn insert dữ liệu mới
-    console.log("chay đến đây111");
-
     const questions = await Questions.bulkCreate(QuestionsData); // Giả sử QuestionsData là dữ liệu bạn muốn insert
     res.status(201).json(questions);
-    console.log("chay đến đây222");
+ 
 
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
+//Get 12 questions from 50 questions
 exports.getTwentyQuestion = asyncHandler(async (req, res) => {
   try {
     const allQuestions = await Questions.findAll();
