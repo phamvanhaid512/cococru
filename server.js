@@ -12,10 +12,12 @@ app.get("/api/questions/", (req, res, next) => {
 app.listen(port, () => {
       console.log(`Application is running on port ${port}`);
 });
+//phamvanhai hai
+
 // process.on('unhandledRejection', (err) => {
 //       console.log('UNHANDLED REJECTION!!!  shutting down ...');
 //       console.log(err.name, err.message);
-//       server.close(() => {
+//       server.closgite(() => {
 //             process.exit(1);
 //       });
 // });
