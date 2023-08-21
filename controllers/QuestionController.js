@@ -25,7 +25,6 @@ exports.getTwentyQuestion = asyncHandler(async (req, res) => {
   try {
     const allQuestions = await Questions.findAll();
     const totalQuestions = allQuestions.length;
-
     if (totalQuestions <= 5) {
       res.json(allQuestions); // Trả về tất cả câu hỏi nếu số lượng câu hỏi ít hơn hoặc bằng 5.
     } else {

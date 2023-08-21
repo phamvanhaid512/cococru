@@ -1,10 +1,16 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const { sequelize }  = require('./index.js')
+const { sequelize } = require('./index.js')
 const QuestionsModule = sequelize.define("questions", {
-  question: {
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  nameTask: {
     type: DataTypes.STRING
   },
-  answer1: {
+  question: {
     type: DataTypes.STRING
   },
   answer2: {
@@ -22,6 +28,9 @@ const QuestionsModule = sequelize.define("questions", {
   },
   explain: {
     type: DataTypes.TEXT
+  },
+  time: {
+    type: DataTypes.INTEGER
   }
 });
 
