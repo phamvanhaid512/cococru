@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const { sequelize } = require('./index.js')
+const { sequelize } = require('./index.js');
+const  CategoryModule = require ('./CategoriesModel');
 const QuestionsModule = sequelize.define("questions", {
   id: {
     type: DataTypes.INTEGER,
@@ -31,8 +32,19 @@ const QuestionsModule = sequelize.define("questions", {
   },
   time: {
     type: DataTypes.INTEGER
+  },
+  categoryId: { // Thêm trường categoryId để đại diện cho khóa ngoại
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'categories', // Tên bảng liên quan
+      key: 'id' // Khóa chính của bảng liên quan
+    }
   }
 });
+// Định nghĩa liên kết
+QuestionsModule.belongsTo(CategoryModule, { foreignKey: 'categoryId', as: 'category' });
+CategoryModule.hasMany(QuestionsModule, { foreignKey: 'categoryId', as: 'questions' });
 
 QuestionsModule.sync()
   .then(() => {
