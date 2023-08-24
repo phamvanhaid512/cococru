@@ -7,5 +7,4 @@ router.post("/createCategory",QuestionController.CreateCategory);
 router.post("/createQuestion",QuestionController.CreateQuestions);
 router.get("/getTwentyQuestion/:categoryId",QuestionController.getTwentyQuestion);
 // router.post("/checkQuestions/:questionId",QuestionController.CheckAswerQuestions); api này chưa sài được nhé
-
 module.exports = router;

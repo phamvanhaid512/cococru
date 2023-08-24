@@ -8,9 +8,6 @@ const QuestionsModule = sequelize.define("questions", {
     primaryKey: true,
     autoIncrement: true
   },
-  nameTask: {
-    type: DataTypes.STRING
-  },
   question: {
     type: DataTypes.STRING
   },
