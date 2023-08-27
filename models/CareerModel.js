@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const { sequelize } = require('./index.js')
-const CategoryModule = sequelize.define("career", {
+const CareerModule = sequelize.define("careers", {
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -15,10 +15,10 @@ const CategoryModule = sequelize.define("career", {
     },
     description: {
         type: DataTypes.STRING
-    }
+    } 
 });
 
-CategoryModule.sync()
+CareerModule.sync()
     .then(() => {
         console.log('Career table created successfully!');
     })
@@ -26,4 +26,4 @@ CategoryModule.sync()
         console.error('Unable to create table: ', error);
     });
 
-module.exports = QuestionsModule;
+module.exports = CareerModule;

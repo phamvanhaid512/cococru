@@ -1,32 +1,39 @@
 
-const {sequelize, DataTypes } = require("../config/config")
+const { sequelize, DataTypes } = require("../config/config")
 
 const UserModel = sequelize.define('User', {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    }
+  id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
 
-  });
+  },
+  fullname: {
+    type: DataTypes.STRING,
+
+  },
+  gender: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
+  },
+  nickName: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    allowNull: false
+  }
+});
 
 sequelize.sync()
   .then(() => {
@@ -35,4 +42,4 @@ sequelize.sync()
   .catch((error) => {
     console.log('Error creating User table: ', error);
   });
-module.exports= { UserModel }
+  module.exports = UserModel
