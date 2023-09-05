@@ -70,13 +70,4 @@ Object.keys(db).forEach((modelName) => {
 });
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-
-// db.roles = require("./role.model.js")(sequelize, Sequelize);
-// db.permission = require("./permission.model.js")(sequelize, Sequelize);
-// db.roles.hasMany(db.permission, { as: "permission" });
-// db.permission.belongsTo(db.roles, {
-//   foreignKey: "tutorialId",
-//   as: "role",
-// });
-
 module.exports = db;

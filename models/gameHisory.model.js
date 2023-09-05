@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     var Model = sequelize.define(
         'GameHistory',
         {
+            
             id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,

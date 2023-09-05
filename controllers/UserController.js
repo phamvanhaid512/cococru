@@ -1,4 +1,4 @@
-import { QuestionsData }  from '../Data/praprice.js';
+import { QuestionsData }  from '../Data/Design.js';
 const asyncHandler = require("express-async-handler");
 // import { getTranslate } from '../utils/translate';
 import {User} from '../models';
