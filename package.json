@@ -20,6 +20,7 @@
     "i18n": "^0.15.1",
     "mariadb": "^3.2.0",
     "mysql2": "^2.2.5",
+    "nodemon": "^3.0.1",
     "parse-error": "^0.2.0",
     "pg": "^8.11.2",
     "pg-hstore": "^2.3.4",
@@ -27,9 +28,7 @@
     "sequelize-cli": "^6.6.1",
     "server.js": "^1.0.0",
     "sqlite3": "^5.1.6",
-    "tedious": "^16.4.0",
-    "nodemon": "^3.0.1"
-
+    "tedious": "^16.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.10",
