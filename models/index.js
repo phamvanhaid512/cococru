@@ -1,36 +1,3 @@
-// const Sequelize = require("sequelize");
-// const CONFIG = require('../config/config');
-// const sequelize = new Sequelize(
-//    CONFIG.db_name,
-//    CONFIG.db_user, CONFIG.db_password,
-//    {
-//       operatorsAliases: 0, // change this to zero
-
-//       host: CONFIG.db_host,
-//       dialect: CONFIG.db_dialect,
-//       port: CONFIG.db_port,
-//       operatorsAliases: false,
-//       dialectOptions: {
-//          // useUTC: false, //for reading from database
-//          dateStrings: true,
-//          typeCast: true,
-//          timezone: '+07:00'
-//       },
-//       timezone: '+07:00', //for writing to database
-//       logging: false
-//    }
-// );
-// const User = require('./UserModel');
-// const Career = require('./CareerModel');
-// const Task = require('./TaskModel');
-// const Minigame = require('./MinigameModel');
-// sequelize.authenticate().then(() => {
-//    console.log('Connection has been established successfully.');
-// }).catch((error) => {
-//    console.error('Unable to connect to the database: ', error);
-// });
-
-// module.exports = { sequelize }
 'use strict';
 const CONFIG = require('../config/config');
 var fs = require('fs');
@@ -39,6 +6,7 @@ var Sequelize = require('sequelize');
 var basename = path.basename(__filename);
 var db = {};
 console.log('CONFIG---', CONFIG);
+var rejectUnauthorized = CONFIG.app === 'server-dev' ? true : false;
 const sequelize = new Sequelize(CONFIG.db_name, CONFIG.db_user, CONFIG.db_password, {
     host: CONFIG.db_host,
     dialect: CONFIG.db_dialect,
@@ -48,7 +16,8 @@ const sequelize = new Sequelize(CONFIG.db_name, CONFIG.db_user, CONFIG.db_passwo
         // useUTC: false, //for reading from database
         dateStrings: true,
         typeCast: true,
-        timezone: '+07:00'
+        timezone: '+07:00',
+        ssl: { minVersion: 'TLSv1.2', rejectUnauthorized }
     },
     timezone: '+07:00', //for writing to database
     logging: false
