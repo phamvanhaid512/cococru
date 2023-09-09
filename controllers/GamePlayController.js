@@ -108,16 +108,27 @@ exports.getAllQuestions = asyncHandler(async (req, res, next) => {
 // Get 12 questions from 50 questions
 exports.getRamDomQuestion = async (req, res, next) => {
     try {
+        // Lấy ngẫu nhiên 12 câu hỏi dựa trên khóa ngoại "careerId" cụ thể (ví dụ: careerId = 1)
+        const careerId = req.params.careerId; // Thay đổi giá trị careerId theo nhu cầu của bạn
+
         const questionsList = await Question.findAll({
+            where: {
+                careerId: careerId
+            },
             include: {
                 model: Answer,
                 as: 'questions'
             }
         });
-        console.log("Lay danh sach", questionsList);
         // Lấy ngẫu nhiên 12 câu hỏi từ danh sách
         const randomQuestions = questionsList.sort(() => Math.random() - 0.5).slice(0, 12);
-        res.status(200).json(randomQuestions);
+        return ReS(
+            res,
+            {
+                randomQuestions
+            },
+            200
+        );
     } catch (error) {
         next(error);
     }
@@ -128,7 +139,13 @@ exports.postHistoryGame = asyncHandler(async (req, res, next) => {
     try {
     const {enegy,stars,coin } = req.body;
     const gameHistoryDoc = await GameHistory.create({enegy,stars,coin});
-    res.json(gameHistoryDoc);
+    return ReS(
+        res,
+        {
+            gameHistoryDoc
+        },
+        200
+    );
     } catch (error) {
       next(error);
     }
