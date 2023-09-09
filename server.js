@@ -32,6 +32,7 @@ app.get("/api/questions/", (req, res, next) => {
       res.json("test");
 });
 //router
+
 app.use("/api/users/", UserRouter);
 app.use("/api/gamePlay/", GamePlayRouter);
 app.use("/api/careers/", CareerRouter);
