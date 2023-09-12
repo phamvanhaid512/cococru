@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true
             },
             nickName: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.STRING,
                 allowNull: true
             },
             isAdmin: {
