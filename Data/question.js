@@ -280,7 +280,7 @@ module.exports.QuestionsData = {
 
             question: "Nguyên tắc thiết kế nào sau đây được sử dụng để tạo luồng trực quan (visual flow) trong thiết kế?",
             explain: "Một khía cạnh quan trọng của nhiều thiết kế là cách thức mà mắt sẽ di chuyển trên trang, và hướng mà nó đi. Dòng chảy điều hướng và sự điều hướng thị giác sẽ làm cho người xem đọc và tiếp nhận chữ in trong khi đồng thời xem được hình ảnh."
-            ,answer: [
+            , answer: [
                 {
                     id: 1,
                     answer: "Direction",
@@ -557,17 +557,96 @@ module.exports.QuestionsData = {
                     isCorrect: false
                 }
             ]
-        }
-    ],
-    CNTT: [
+        },
         {
-            id: 1,
-            question: "Phần mềm nào sau đây thường được sử dụng để tạo đồ họa vector?",
-            explain: "Adobe Illustrator là công cụ thiết kế đồ họa hàng đầu cho phép bạn thiết kế mọi thứ mà bạn có thể tưởng tượng ra - từ logo và biểu tượng đến đồ họa hay hình minh họa - và tùy chỉnh các thiết kế đó với độ chính xác chuyên nghiệp. Illustrator phù hợp nhất để tạo đồ họa có kích cỡ có thể tăng hoặc giảm vô hạn mà không làm mờ hoặc mất độ sắc nét, vì chúng được tạo từ các điểm, đường thẳng và đường cong - không phải pixel. Hãy dùng các đồ họa vector này ở bất kỳ định dạng nào bạn thích - từ nhỏ đến cực lớn, kỹ thuật số hoặc in.",
-            answer: [
+            id: 21,
+            question: "Định dạng video nào là tốt nhất để stream trực tuyến?",
+            explain: "MP4 với độ tương thích cực kỳ cao nên hầu hết thiết bị đều được hỗ trợ và sử dụng. Video sẽ được nén bằng MPEG-4 hoặc H.264 mang lại chất lượng video cao và chỉ chiếm dung lượng khá thấp. Hiện nay đã được sử dụng phổ biến trên nhiều kênh stream online, youtube và nhiều trang phim uy tín,..."
+            , answer: [
                 {
                     id: 1,
-                    answer: "Adobe Illustrator",
+                    answer: "MP4",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "AVI",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "MOV",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "WMV",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 22,
+            question: "Định dạng nào là tốt nhất để lưu hình ảnh chất lượng cao?",
+            explain: "Chụp ở định dạng RAW, máy ảnh sẽ ghi lại tất cả dữ liệu từ cảm biến. Giúp các tệp đạt chất lượng cao nhất và xử lý tốt hơn."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "RAW",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "BMP",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "JPG",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "GIF",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 23,
+            question: "Mục đích của Storyboard trong thiết kế đa phương tiện là gì?",
+            explain: "Storyboard chứa một chuỗi các hình vẽ (sketch) biểu diễn các thao tác của người dùng trên thiết bị để thực hiện 1 công việc. Trong thiết kế UX, storyboard thường được dùng để trực quan hóa các ý tưởng, tình huống cụ thể        "
+            ,answer: [
+                {
+                    id: 1,
+                    answer: "Lập kế hoạch và tổ chức nội dung của một dự án đa phương tiện",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Để tạo một bản phác thảo sơ bộ của thiết kế cuối cùng",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Để kiểm tra chức năng của một dự án đa phương tiện ",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Để tối ưu hóa hiệu suất của một dự án đa phương tiện",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 24,
+            question: "Phần mềm nào thường được sử dụng để chỉnh sửa âm thanh?",
+            explain: "Audition là một bộ công cụ toàn diện bao gồm hiển thị nhiều rãnh, dạng sóng và quang phổ để tạo, trộn, chỉnh sửa và khôi phục nội dung âm thanh."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Adobe Audition",
                     isCorrect: true
                 },
                 {
@@ -577,45 +656,776 @@ module.exports.QuestionsData = {
                 },
                 {
                     id: 3,
-                    answer: "Adobe InDesign",
+                    answer: "Adobe After Effect",
                     isCorrect: false
                 },
                 {
                     id: 4,
-                    answer: "CorelDRAW",
+                    answer: "Adobe Premiere",
                     isCorrect: false
                 }
             ]
         },
         {
-            id: 2,
-
-            question: "Công cụ nào sau đây có thể được sử dụng để tạo vùng chọn trong Photoshop?",
-            explain: "Công cụ Lasso thông thường là một công cụ tạo vùng chọn tự do, có nghĩa là nó sẽ không tự động bám vào cạnh của đối tượng hoặc cố gắng dự đoán những gì bạn muốn chọn. Bạn đặt Lasso ở đâu thì nó sẽ ở đó."
+            id: 25,
+            question: "Nguyên tắc thiết kế nào đề cập đến mối quan hệ giữa các yếu tố trong một thiết kế?",
+            explain: "Unity là nguyên tắc đồng nhất là nguyên tắc sử dụng những yếu tố, đối tượng, màu sắc tương tự nhau để tạo sự xuyên suốt cho thiết kế. Một số cách để tạo sự đồng nhất là: tạo sự liên tục, sắp xếp có liên kết, đặt các đối tượng gần nhau,…"
             , answer: [
                 {
                     id: 1,
-                    answer: "Lasso tool",
+                    answer: "Unity",
                     isCorrect: true
                 },
                 {
                     id: 2,
-                    answer: "Brush tool",
+                    answer: "Balance",
                     isCorrect: false
                 },
                 {
                     id: 3,
-                    answer: "Eraser tool",
+                    answer: "Contrast",
                     isCorrect: false
                 },
                 {
                     id: 4,
-                    answer: "Clone stamp tool",
+                    answer: "Emphasis",
                     isCorrect: false
                 }
             ]
-
+        },
+        {
+            id: 26,
+            question: "Sự khác biệt giữa đồ họa raster và vector là gì?",
+            explain: ""
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Đồ họa raster được tạo thành từ các pixel, trong khi đồ họa vector được tạo thành từ các đường và hình.",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Đồ họa raster dễ chỉnh sửa hơn đồ họa vector.",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Đồ họa vector phù hợp để in hơn đồ họa raster. ",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Đồ họa vector có kích thước lớn hơn đồ họa raster.",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 27,
+            question: "Kiểu nén nào loại bỏ những dữ liệu mà con người không cảm nhận được?",
+            explain: "Lossy là tính năng nén mất dữ liệu loại bỏ càng nhiều dữ liệu càng tốt để làm cho kích thước tệp càng nhỏ càng tốt. Dữ liệu được coi là ít đáng chú ý sẽ được loại bỏ để bản thân tệp vẫn phần lớn giống với bản gốc."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Lossy compression  ",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Lossless compression",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "ZIP compression",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "RAR compression",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 28,
+            question: "Mục đích chính của thiết kế đa phương tiện là gì?",
+            explain: "Lossy là tính năng nén mất dữ liệu loại bỏ càng nhiều dữ liệu càng tốt để làm cho kích thước tệp càng nhỏ càng tốt. Dữ liệu được coi là ít đáng chú ý sẽ được loại bỏ để bản thân tệp vẫn phần lớn giống với bản gốc."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Để truyền đạt thông điệp bằng nhiều loại phương tiện",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Để tạo ra các thiết kế hấp dẫn trực quan",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Để thể hiện sự sáng tạo",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Để tạo ra một sự kết hợp hài hòa nhiều loại phương tiện.",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 29,
+            question: "Phần mềm nào sau đây thường được sử dụng trong thiết kế đa phương tiện?",
+            explain: "Lossy là tính năng nén mất dữ liệu loại bỏ càng nhiều dữ liệu càng tốt để làm cho kích thước tệp càng nhỏ càng tốt. Dữ liệu được coi là ít đáng chú ý sẽ được loại bỏ để bản thân tệp vẫn phần lớn giống với bản gốc."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Tất cả",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Adobe Photoshop",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Adobe Premiere Pro",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Adobe After Effects",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 30,
+            question: "Mục đích của xây dựng wireframe trong thiết kế đa phương tiện là gì?",
+            explain: "Wireframe (khung xương/cấu trúc dây) là một công cụ trực quan để thiết kế web ở cấp độ cấu trúc. Một wireframe thường được sử dụng để bố trí nội dung và chức năng trên một trang."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Để cung cấp một hướng dẫn trực quan cho bố cục của một thiết kế",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Không có điều nào ở đây",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Để tạo ra một thiết kế chi tiết",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Để thêm hiệu ứng hình ảnh vào một thiết kế",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 31,
+            question: "Cái nào sau đây là một ví dụ về thiết kế đa phương tiện?",
+            explain: "Thiết kế đồ họa đa phương tiện là sự kết hợp của âm thanh, hình ảnh động và ký tự văn bản."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Video có nhạc và đồ họa",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Một trang web chỉ có văn bản",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Một tấm áp phích chỉ có đồ họa",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Một bản nhạc",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 32,
+            question: "Những kỹ năng nào sau đây là cần thiết cho một multimedia designer?",
+            explain: "Thiết kế đồ họa đa phương tiện là sự kết hợp của âm thanh, hình ảnh động và ký tự văn bản."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Tất cả những điều được nêu",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Kỹ năng chỉnh sửa video",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Kỹ năng diễn hoạt hình ảnh",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Kỹ năng thiết kế đồ họa",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 33,
+            question: "Mục đích của Typography là gì?",
+            explain: "Typography là nghệ thuật sắp xếp các chữ cái, trình bày, hiển thị màu sắc, tạo phong cách cho chữ. Làm nổi bật, gửi gắm thông điệp, ý nghĩa ẩn trong chữ về sản phẩm và gây sự chú ý, tạo ấn tượng cho người dùng."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Để truyền đạt một thông điệp",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Để làm cho một thiết kế trông hấp dẫn trực quan ",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Để thêm hiệu ứng hình ảnh vào một thiết kế",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Để điều chỉnh màu hình ảnh",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 34,
+            question: "Điều nào sau đây là quan trọng trong thiết kế đa phương tiện?",
+            explain: "Typography là nghệ thuật sắp xếp các chữ cái, trình bày, hiển thị màu sắc, tạo phong cách cho chữ. Làm nổi bật, gửi gắm thông điệp, ý nghĩa ẩn trong chữ về sản phẩm và gây sự chú ý, tạo ấn tượng cho người dùng."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Tất cả những điều được nêu",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Kích thước tập tin ",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Bảng màu",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Kiểu chữ",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 35,
+            question: "Mục đích của lý thuyết màu sắc (color theory) trong thiết kế đa phương tiện là gì?",
+            explain: "Lý thuyết màu sắc giải thích cách con người tiếp nhận màu sắc; cách hòa trộn, phối hợp hay bất điều hợp của màu sắc; những thông điệp ngầm mà màu sắc truyền tải (thường là về văn hóa); và các phương thức dùng để tái tạo màu sắc."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Để làm cho một thiết kế trông hấp dẫn trực quan",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Để truyền đạt một thông điệp",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Để thêm hiệu ứng hình ảnh vào một thiết kế",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Không có điều nào đã nêu",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 36,
+            question: "Điều nào sau đây là một ví dụ về thiết kế tương tác đa phương tiện?",
+            explain: "Lý thuyết màu sắc giải thích cách con người tiếp nhận màu sắc; cách hòa trộn, phối hợp hay bất điều hợp của màu sắc; những thông điệp ngầm mà màu sắc truyền tải (thường là về văn hóa); và các phương thức dùng để tái tạo màu sắc."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Một trang web có các thành phần có thể click (clickable element)",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Một bài nhạc",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Một video",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Một áp phích",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 37,
+            question: "Mục đích của audio trong thiết kế đa phương tiện là gì?",
+            explain: ""
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Để truyền đạt một thông điệp",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Để làm cho một thiết kế trông hấp dẫn trực quan",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Để thêm hiệu ứng hình ảnh vào một thiết kế",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Để thiết kế đẹp mắt hơn",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 38,
+            question: "Mục đích của animation trong thiết kế đa phương tiện là gì?",
+            explain: "Animation được biết đến như nghệ thuật diễn hoạt hình ảnh trong các ấn phẩm quảng cáo; các trò chơi điện tử; phim ảnh, v.v."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Để thêm hiệu ứng hình ảnh vào một thiết kế",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Để làm cho một thiết kế trông hấp dẫn trực quan",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Để truyền đạt một thông điệp",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Không có điều nào đã nêu",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 39,
+            question: "Cái nào sau đây là một ví dụ về dự án thiết kế đa phương tiện?",
+            explain: "Animation được biết đến như nghệ thuật diễn hoạt hình ảnh trong các ấn phẩm quảng cáo; các trò chơi điện tử; phim ảnh, v.v."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Một ứng dụng di động với đồ họa và hình ảnh động",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Một tập tài liệu chỉ có văn bản",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Một bảng quảng cáo chỉ có đồ họa",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Không có điều nào đã nêu",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 40,
+            question: "Sự khác biệt giữa thiết kế UX và UI là gì?",
+            explain: "Thiết kế UX tập trung vào trải nghiệm người dùng, trong khi thiết kế UI tập trung vào giao diện trực quan"
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Thiết kế UX tập trung vào trải nghiệm người dùng, trong khi thiết kế UI tập trung vào giao diện trực quan",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Thiết kế UX tập trung vào giao diện trực quan, trong khi thiết kế UI tập trung vào trải nghiệm người dùng",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Thiết kế UX và thiết kế UI giống nhau",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Cả thiết kế UX và UI đều không quan trọng đối với thiết kế tương tác",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 41,
+            question: "Wireframe là gì?",
+            explain: "Thiết kế UX tập trung vào trải nghiệm người dùng, trong khi thiết kế UI tập trung vào giao diện trực quan"
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Một sketch sơ bộ về bố cục thiết kế tương tác",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Một high fidelity prototype của thiết kế tương tác",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Một blueprint đã sẵn sàng để thực hiện",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Mô tả bằng văn bản về thiết kế tương tác",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 42,
+            question: "Mục đích của Moodboard trong thiết kế tương tác là gì?",
+            explain: "Moodboard có nghĩa là các bảng tâm trạng (kỹ thuật số hoặc tài liệu) mà mọi người kết hợp các hình ảnh, kết cấu khác nhau để người xem có thể hình dung ý tưởng và concept."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Để trình bày các ý tưởng thiết kế khác nhau",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Để tạo một high fidelity prototype của một thiết kế tương tác",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Để cung cấp các hướng dẫn bằng văn bản cho một thiết kế tương tác",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Để kiểm tra khả năng sử dụng của một thiết kế tương tác",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 43,
+            question: "Mục đích của thiết kế responsive trong thiết kế tương tác là gì?",
+            explain: "Responsive dùng để thiết kế giao diện sao cho các nội dung có thể hiển thị tương thích trên nhiều loại thiết bị khác nhau."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Để tạo các thiết kế hoạt động trên nhiều thiết bị và kích thước màn hình khác nhau",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Để thiết kế trông bắt mắt hơn",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Để tăng tốc độ tải trang web",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Để cải thiện khả năng truy cập các trang web cho người dùng khuyết tật",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 44,
+            question: "Mục đích của A/B test trong thiết kế tương tác là gì?",
+            explain: "A/B test quy trình mà trong đó hai phiên bản (A và B) sẽ được cùng so sánh trong một môi trường / tình huống được xác định và qua đó đánh giá xem phiên bản nào hiệu quả hơn."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Để đánh giá hiệu quả của một thiết kế bằng cách so sánh hai phiên bản",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Để kiểm tra tốc độ tải trang web",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Để kiểm tra Usability của thiết kế bằng cách yêu cầu người dùng thực hiện các tác vụ",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Để kiểm tra khả năng truy cập của thiết kế dành cho người dùng khuyết tật",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 45,
+            question: "Mục đích của Typography trong thiết kế tương tác là gì?",
+            explain: "A/B test quy trình mà trong đó hai phiên bản (A và B) sẽ được cùng so sánh trong một môi trường / tình huống được xác định và qua đó đánh giá xem phiên bản nào hiệu quả hơn."
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Để tạo bố cục văn bản hấp dẫn trực quan",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Để tăng tốc độ tải trang web",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Để cải thiện khả năng truy cập các trang web cho người dùng khuyết tật",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Để tạo hiệu ứng hình ảnh bằng văn bản",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 46,
+            question: "Mục đích của style guide trong thiết kế tương tác là gì?",
+            explain: "Style Guide là một tập hợp các tiêu chuẩn áp dụng cho việc tạo ra các văn bản hoặc thiết kế dựa trên tài sản cho một tổ chức, một ấn phẩm hoặc một lĩnh vực. Đảm bảo nội dung được sản xuất một cách nhất quán, phù hợp với mục tiêu của tổ chức, ấn phẩm hoặc lĩnh vực đó"
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Để đảm bảo tính thống nhất giữa các thiết kế",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Cung cấp tài liệu chi tiết cho thiết kế",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Để tạo ra một thiết kế cuối cùng",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Để kiểm tra usability của thiết kế",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 47,
+            question: "Thiết kế lấy người dùng làm trung tâm là:",
+            explain: "Style Guide là một tập hợp các tiêu chuẩn áp dụng cho việc tạo ra các văn bản hoặc thiết kế dựa trên tài sản cho một tổ chức, một ấn phẩm hoặc một lĩnh vực. Đảm bảo nội dung được sản xuất một cách nhất quán, phù hợp với mục tiêu của tổ chức, ấn phẩm hoặc lĩnh vực đó"
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Thiết kế vì lợi ích của người dùng",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Thiết kế vì lợi ích của người thiết kế",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Thiết kế vì lợi ích của khách hàng",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Thiết kế vì lợi ích của cả nhà thiết kế và khách hàng",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 48,
+            question: "Yếu tố thiết kế nào sau đây có thể nâng cao trải nghiệm người dùng?",
+            explain: "Style Guide là một tập hợp các tiêu chuẩn áp dụng cho việc tạo ra các văn bản hoặc thiết kế dựa trên tài sản cho một tổ chức, một ấn phẩm hoặc một lĩnh vực. Đảm bảo nội dung được sản xuất một cách nhất quán, phù hợp với mục tiêu của tổ chức, ấn phẩm hoặc lĩnh vực đó"
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Tất cả những điều trên",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Color scheme",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Font choice",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Animation",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 49,
+            question: "Mục đích của Personas trong thiết kế tương tác là gì?",
+            explain: "Persona là một hình mẫu giả định, đại diện cho chân dung khách hàng lý tưởng của dự án"
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Để tạo người dùng giả định để thử nghiệm trang web hoặc ứng dụng",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Để xác định bảng màu tốt nhất cho trang web hoặc ứng dụng",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Để SEO cho trang web hoặc ứng dụng với các công cụ tìm kiếm",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Để kiểm tra Usability của trang web hoặc ứng dụng",
+                    isCorrect: false
+                }
+            ]
+        },
+        {
+            id: 50,
+            question: "Quá trình điều chỉnh màu sắc và độ tương phản để phục vụ một mục đích nghệ thuật được gọi là gì?",
+            explain: "Persona là một hình mẫu giả định, đại diện cho chân dung khách hàng lý tưởng của dự án"
+            , answer: [
+                {
+                    id: 1,
+                    answer: "Color grading",
+                    isCorrect: true
+                },
+                {
+                    id: 2,
+                    answer: "Cropping",
+                    isCorrect: false
+                },
+                {
+                    id: 3,
+                    answer: "Resizing",
+                    isCorrect: false
+                },
+                {
+                    id: 4,
+                    answer: "Retouching",
+                    isCorrect: false
+                }
+            ]
         }
-    ]
+    ],
+    // CNTT: [
+    //     {
+    //         id: 1,
+    //         question: "Phần mềm nào sau đây thường được sử dụng để tạo đồ họa vector?",
+    //         explain: "Adobe Illustrator là công cụ thiết kế đồ họa hàng đầu cho phép bạn thiết kế mọi thứ mà bạn có thể tưởng tượng ra - từ logo và biểu tượng đến đồ họa hay hình minh họa - và tùy chỉnh các thiết kế đó với độ chính xác chuyên nghiệp. Illustrator phù hợp nhất để tạo đồ họa có kích cỡ có thể tăng hoặc giảm vô hạn mà không làm mờ hoặc mất độ sắc nét, vì chúng được tạo từ các điểm, đường thẳng và đường cong - không phải pixel. Hãy dùng các đồ họa vector này ở bất kỳ định dạng nào bạn thích - từ nhỏ đến cực lớn, kỹ thuật số hoặc in.",
+    //         answer: [
+    //             {
+    //                 id: 1,
+    //                 answer: "Adobe Illustrator",
+    //                 isCorrect: true
+    //             },
+    //             {
+    //                 id: 2,
+    //                 answer: "Adobe Photoshop",
+    //                 isCorrect: false
+    //             },
+    //             {
+    //                 id: 3,
+    //                 answer: "Adobe InDesign",
+    //                 isCorrect: false
+    //             },
+    //             {
+    //                 id: 4,
+    //                 answer: "CorelDRAW",
+    //                 isCorrect: false
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         id: 2,
+
+    //         question: "Công cụ nào sau đây có thể được sử dụng để tạo vùng chọn trong Photoshop?",
+    //         explain: "Công cụ Lasso thông thường là một công cụ tạo vùng chọn tự do, có nghĩa là nó sẽ không tự động bám vào cạnh của đối tượng hoặc cố gắng dự đoán những gì bạn muốn chọn. Bạn đặt Lasso ở đâu thì nó sẽ ở đó."
+    //         , answer: [
+    //             {
+    //                 id: 1,
+    //                 answer: "Lasso tool",
+    //                 isCorrect: true
+    //             },
+    //             {
+    //                 id: 2,
+    //                 answer: "Brush tool",
+    //                 isCorrect: false
+    //             },
+    //             {
+    //                 id: 3,
+    //                 answer: "Eraser tool",
+    //                 isCorrect: false
+    //             },
+    //             {
+    //                 id: 4,
+    //                 answer: "Clone stamp tool",
+    //                 isCorrect: false
+    //             }
+    //         ]
+
+    //     }
+    // ]
 
 };

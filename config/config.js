@@ -11,11 +11,10 @@ CONFIG.db_name = process.env.DB_NAME || 'cococru';
 CONFIG.db_user = process.env.DB_USER || 'root';
 CONFIG.db_password = process.env.DB_PASSWORD || 'haid5122003';
 // CONFIG.timezone = process.env.TIMEZONE || '+07:00';
-
 CONFIG.jwt_encryption = process.env.JWT_ENCRYPTION || 'jwt_please_change';
 CONFIG.jwt_expiration = process.env.JWT_EXPIRATION || '10000';
 CONFIG.jwt_expires_in = process.env.JWT_EXPIRES_IN || '30d';
-CONFIG.jwt_secret = process.env.JWT_SECRET || 'CoCo2021';
+CONFIG.jwt_secret = process.env.JWT_SECRET || 'CoCo2021';;
 
 // CONFIG SESSION ID FOR END USER MESSAGE
 // CONFIG.jwt_secret_session = process.env.JWT_SECRET_SESSION || 'SessionForEndUser';

@@ -1,5 +1,4 @@
 const Sequelize = require("sequelize");
-
 module.exports = (sequelize, DataTypes) => {
     var Model = sequelize.define(
         'Task',
@@ -15,17 +14,12 @@ module.exports = (sequelize, DataTypes) => {
             },
             careerId: {
                 type: DataTypes.INTEGER,
-            },
-            minigameId: {
-                type: DataTypes.INTEGER,
             }
         },
         {
             tableName: 'tasks'
         }
     );
-
-    // Thêm dòng tạo bảng
     sequelize.sync()
         .then(() => {
             console.log("Table 'tasks' has been created.");
@@ -33,12 +27,9 @@ module.exports = (sequelize, DataTypes) => {
         .catch((error) => {
             console.error("Error creating 'tasks' table:", error);
         });
-
-    Model.associate = function(models) {
+    Model.associate = function (models) {
         Model.belongsTo(models.Career, { foreignKey: 'careerId', as: 'task' });
-        Model.belongsTo(models.Minigame, { foreignKey: 'minigameId', as: 'minigame' });
-
+        Model.hasMany(models.Question, { foreignKey: 'taskId', as: 'taskQuestion' });
     }
-
     return Model;
 };

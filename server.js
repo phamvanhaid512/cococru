@@ -1,9 +1,7 @@
 import express from 'express';
 import { db_name, host, port as _port } from './config/config';
 import config from 'dotenv';
-
 import UserRouter from './routes/UserRoutes.js';
-
 // import QuestionRouter from './routes/QuestionsRoutes.js';
 import GamePlayRouter from './routes/GamePlayRoutes.js';
 import CareerRouter from './routes/CareerRoutes.js';
@@ -32,7 +30,6 @@ app.get("/api/questions/", (req, res, next) => {
       res.json("test");
 });
 //router
-
 app.use("/api/users/", UserRouter);
 app.use("/api/gamePlay/", GamePlayRouter);
 app.use("/api/careers/", CareerRouter);
@@ -42,9 +39,7 @@ app.use('*', (req, res, next) => {
       const err = new AppError(404, 'fail', 'undefined route');
       next(err, req, res, next);
 });
-
 app.use(globalErrHandler);
-
 app.listen(port, () => {
       console.log(`Application is running on port ${port}`);
 });

@@ -1,10 +1,9 @@
 const { QuestionsData } = require('../Data/Design.js');
 const asyncHandler = require("express-async-handler");
-
-import { Career, Minigame, Task, GameHistory } from "../models";
+import { Career, Minigame, Task, GameHistory ,UserCareer,User} from "../models";
 import { errorCode } from '../utils/util.helper';
 import { ReE, ReS } from '../utils/util.service';
-//Create Question
+
 //Create Career 
 exports.createCareer = asyncHandler(async (req, res, next) => {
   try {
@@ -38,14 +37,54 @@ exports.createMinigame = asyncHandler(async (req, res, next) => {
     next(error);
   }
 });
-//getAllCareer
-exports.getAllCareer = asyncHandler(async (req, res, next) => {
+//getStartById
+exports.getStartById = asyncHandler(async (req, res, next) => {
+  const userId = req.params.userId;
   try {
-    const AllCareer = await Career.findAll();
+    const AllStart = await UserCareer.findAll({
+      where: { user_id: userId },
+      include: [
+        {
+          model: User,
+          as: 'user',
+          attributes: ['id', 'email', 'fullname', 'gender', 'nickName', 'isAdmin', 'stars', 'coin', 'updatedAt', 'createdAt']
+        },
+        {
+          model: Career,
+          as: 'career',
+          attributes: ['id', 'name', 'logo', 'description', 'createdAt', 'updatedAt']
+        }
+      ]
+    });
+    // Lấy thông tin của người dùng từ bất kỳ bản ghi nào trong AllStart
+    const userInformation = {
+      id: AllStart.length > 0 ? AllStart[0].user.id : null,
+      email: AllStart.length > 0 ? AllStart[0].user.email : null,
+      fullname: AllStart.length > 0 ? AllStart[0].user.fullname : null,
+      gender: AllStart.length > 0 ? AllStart[0].user.gender : null,
+      nickName: AllStart.length > 0 ? AllStart[0].user.nickName : null,
+      isAdmin: AllStart.length > 0 ? AllStart[0].user.isAdmin : null,
+      stars: AllStart.length > 0 ? AllStart[0].user.stars : null,
+      coin: AllStart.length > 0 ? AllStart[0].user.coin : null,
+      updatedAt: AllStart.length > 0 ? AllStart[0].user.updatedAt : null,
+      createdAt: AllStart.length > 0 ? AllStart[0].user.createdAt : null
+    };
+    // Biến đổi dữ liệu để hiển thị userId 1 lần và danh sách career
+    const result = {
+      user: userInformation,
+      careers: AllStart.map((start) => ({
+        career_id: start.career.id,
+        name: start.career.name,
+        logo: start.career.logo,
+        description: start.career.description,
+        createdAt: start.career.createdAt,
+        updatedAt: start.career.updatedAt
+      }))
+    };
     return ReS(
       res,
       {
-        AllCareer
+        result
       },
       200
     );
@@ -109,7 +148,6 @@ exports.getTaskById = asyncHandler(async (req, res, next) => {
     next(error);
   }
 });
-
 exports.getTasksByCareer = async (req, res, next) => {
   try {
     const careerId = req.params.careerId;
@@ -126,26 +164,6 @@ exports.getTasksByCareer = async (req, res, next) => {
       res,
       {
         tasksByCareer 
-      },
-      200
-  );
-  } catch (error) {
-    next(error);
-  }
-};
-//getMinigameByIdTask
-exports.getMinigameByIdTask = async (req, res, next) => {
-  try {
-    const taskId = req.params.taskId;
-    const minigameByTask = await Minigame.findByPk(taskId);
-    if (minigameByTask.length === 0) {
-      return res.status(404).json({ message: 'Không tìm thấy tác vụ cho ngành nghề đã cho.' });
-    }
-
-    return ReS(
-      res,
-      {
-        minigameByTask 
       },
       200
   );

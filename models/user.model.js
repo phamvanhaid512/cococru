@@ -11,28 +11,44 @@ module.exports = (sequelize, DataTypes) => {
             },
             email: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
             },
             password: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: true,
 
             },
             fullname: {
                 type: DataTypes.STRING,
+                allowNull: true
 
             },
             gender: {
-                type: DataTypes.BOOLEAN,
-                allowNull: false
+                type: DataTypes.ENUM('male', 'female', 'other'),
+                allowNull: true
             },
             nickName: {
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: true
+            },
+            isAdmin: {
+                type: DataTypes.BOOLEAN,
+                allowNull: true
+
+            },
+            stars: {
+                type: DataTypes.INTEGER,
+                allowNull: true
+
+            },
+            coin: {
+                type: DataTypes.INTEGER,
+                allowNull: true
+
             },
             updatedAt: {
                 type: DataTypes.DATE,
-                allowNull: false
+                allowNull: true
             }
         },
         {
@@ -40,11 +56,14 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
     Model.associate = function (models) {
-        Model.belongsToMany(models.Career, { through: 'UserCareer', as: 'relaUserCareer' });
-        // Model.belongsToMany(models.User,{through: 'UserCareer',as: 'relaCareerUser'});
+        Model.belongsToMany(models.Career, {
+            through: 'UserCareer',
+            foreignKey: 'user_id',
+            otherKey: 'career_id',
+            as: 'career',
+            attributes: []
+        });
         Model.hasMany(models.GameHistory, { foreignKey: 'userId', as: 'history' });
-
-
     }
     return Model;
 }
