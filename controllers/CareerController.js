@@ -1,6 +1,6 @@
 const { QuestionsData } = require('../Data/Design.js');
 const asyncHandler = require("express-async-handler");
-import { Career, Minigame, Task, GameHistory ,UserCareer,User} from "../models";
+import { Career, Minigame, Task, GameHistory, UserCareer, User } from "../models";
 import { errorCode } from '../utils/util.helper';
 import { ReE, ReS } from '../utils/util.service';
 
@@ -16,16 +16,29 @@ exports.createCareer = asyncHandler(async (req, res, next) => {
   }
 });
 //Create Task
+// exports.createTask = asyncHandler(async (req, res, next) => {
+//   try {
+//     const { name, logo, type, description, careerId,timeStart } = req.body;
+//     const createTask = await Task.create({ name, logo, type, description, careerId});
+//     console.log(createTask);
+//     ReS(res, { message: "Task created successfully" });
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+//Create Task
 exports.createTask = asyncHandler(async (req, res, next) => {
   try {
-    const { name, logo, type, careerId, minigameId } = req.body;
-    const createTask = await Task.create({ name, logo, type, careerId, minigameId });
+    const { name, logo, type, description, careerId } = req.body;
+    const createTask = await Task.create({ name, logo, type, description, careerId, timeStart: currentTime });
     console.log(createTask);
-    ReS(res, { message: "Task created successfully" });
+
+    ReS(res, { message: "Task created successfully", timeToCountdown });
   } catch (error) {
     next(error);
   }
 });
+
 //Create Minigames
 exports.createMinigame = asyncHandler(async (req, res, next) => {
   try {
@@ -38,60 +51,64 @@ exports.createMinigame = asyncHandler(async (req, res, next) => {
   }
 });
 //getStartById
-exports.getStartById = asyncHandler(async (req, res, next) => {
-  const userId = req.params.userId;
-  try {
-    const AllStart = await UserCareer.findAll({
-      where: { user_id: userId },
-      include: [
+// exports.getAllCareer = asyncHandler(async (req, res, next) => {
+//   const userId = req.user.id;
+//   try {
+//     const AllStart = await Career.findAll({
+//       // where: { id: userId }
+//     });
+//     // Biến đổi dữ liệu để hiển thị userId 1 lần và danh sách career
+   
+//     return ReS(
+//       res,
+//       {
+//         AllStart
+//       },
+//       200
+//     );
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+// //getStartById
+exports.getAllCareer = asyncHandler(async (req, res, next) => {
+    const userId = req.user.id;
+    try {
+      const AllStart = await UserCareer.findAll({
+        where: { user_id: userId },
+        include: [
+          {
+            model: Career,
+            as: 'career'
+         
+          }
+        ]
+      });
+      // Lấy thông tin của người dùng từ bất kỳ bản ghi nào trong AllStart
+     
+      // Biến đổi dữ liệu để hiển thị userId 1 lần và danh sách career
+      const result = {
+
+        careers: AllStart.map((start) => ({
+          career_id: start.career.id,
+          name: start.career.name,
+          logo: start.career.logo,
+          description: start.career.description,
+          createdAt: start.career.createdAt,
+          updatedAt: start.career.updatedAt
+        }))
+      };
+      return ReS(
+        res,
         {
-          model: User,
-          as: 'user',
-          attributes: ['id', 'email', 'fullname', 'gender', 'nickName', 'isAdmin', 'stars', 'coin', 'updatedAt', 'createdAt']
+          result
         },
-        {
-          model: Career,
-          as: 'career',
-          attributes: ['id', 'name', 'logo', 'description', 'createdAt', 'updatedAt']
-        }
-      ]
-    });
-    // Lấy thông tin của người dùng từ bất kỳ bản ghi nào trong AllStart
-    const userInformation = {
-      id: AllStart.length > 0 ? AllStart[0].user.id : null,
-      email: AllStart.length > 0 ? AllStart[0].user.email : null,
-      fullname: AllStart.length > 0 ? AllStart[0].user.fullname : null,
-      gender: AllStart.length > 0 ? AllStart[0].user.gender : null,
-      nickName: AllStart.length > 0 ? AllStart[0].user.nickName : null,
-      isAdmin: AllStart.length > 0 ? AllStart[0].user.isAdmin : null,
-      stars: AllStart.length > 0 ? AllStart[0].user.stars : null,
-      coin: AllStart.length > 0 ? AllStart[0].user.coin : null,
-      updatedAt: AllStart.length > 0 ? AllStart[0].user.updatedAt : null,
-      createdAt: AllStart.length > 0 ? AllStart[0].user.createdAt : null
-    };
-    // Biến đổi dữ liệu để hiển thị userId 1 lần và danh sách career
-    const result = {
-      user: userInformation,
-      careers: AllStart.map((start) => ({
-        career_id: start.career.id,
-        name: start.career.name,
-        logo: start.career.logo,
-        description: start.career.description,
-        createdAt: start.career.createdAt,
-        updatedAt: start.career.updatedAt
-      }))
-    };
-    return ReS(
-      res,
-      {
-        result
-      },
-      200
-    );
-  } catch (error) {
-    next(error);
-  }
-});
+        200
+      );
+    } catch (error) {
+      next(error);
+    }
+  });
 //getCareerById
 exports.getCareerById = asyncHandler(async (req, res, next) => {
   try {
@@ -100,10 +117,10 @@ exports.getCareerById = asyncHandler(async (req, res, next) => {
     return ReS(
       res,
       {
-        careerById 
+        careerById
       },
       200
-  );
+    );
   } catch (error) {
     next(error)
   }
@@ -127,7 +144,7 @@ exports.getTaskByCareerId = asyncHandler(async (req, res, next) => {
         AllTaskCareerById
       },
       200
-  );
+    );
   } catch (error) {
     next(error);
   }
@@ -140,10 +157,10 @@ exports.getTaskById = asyncHandler(async (req, res, next) => {
     return ReS(
       res,
       {
-        TaskById 
+        TaskById
       },
       200
-  );
+    );
   } catch (error) {
     next(error);
   }
@@ -163,10 +180,10 @@ exports.getTasksByCareer = async (req, res, next) => {
     return ReS(
       res,
       {
-        tasksByCareer 
+        tasksByCareer
       },
       200
-  );
+    );
   } catch (error) {
     next(error);
   }

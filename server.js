@@ -29,6 +29,8 @@ app.use(express.json()); // Sử dụng express.json() để xử lý dữ liệ
 app.get("/api/questions/", (req, res, next) => {
       res.json("test");
 });
+
+//set thoi gian
 //router
 app.use("/api/users/", UserRouter);
 app.use("/api/gamePlay/", GamePlayRouter);
@@ -39,6 +41,7 @@ app.use('*', (req, res, next) => {
       const err = new AppError(404, 'fail', 'undefined route');
       next(err, req, res, next);
 });
+
 app.use(globalErrHandler);
 app.listen(port, () => {
       console.log(`Application is running on port ${port}`);

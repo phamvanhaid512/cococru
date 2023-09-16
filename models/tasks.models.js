@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
             },
             careerId: {
                 type: DataTypes.INTEGER,
+            },
+            timeStart: {
+                type:DataTypes.DATE
             }
         },
         {

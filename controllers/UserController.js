@@ -39,7 +39,11 @@ export async function signUp(req, res, next) {
             fullname,
             email,
             password: hashedPassword,
-            isAdmin
+            isAdmin,
+            energy: 12,
+            coin: 1000,
+            stars: 0,
+            level: 0
         });
         //if user create succufully 
         if (user) {
@@ -52,7 +56,7 @@ export async function signUp(req, res, next) {
             for (const careerId of careerIdsToAdd) {
                 await UserCareer.create({
                     user_id: user.id,  // Giả định user.id là ID của người dùng vừa tạo
-                  career_id: careerId
+                    career_id: careerId
                 });
             }
             res.status(201).json({
@@ -73,7 +77,7 @@ export async function signUp(req, res, next) {
 }
 
 export async function submitNickname(req, res, next) {
-    const userId = req.params.userId;
+    const userId = req.user.id;
     const { nickName, gender } = req.body;
     try {
         // Cập nhật thông tin nickname và gender cho người dùng trong cơ sở dữ liệu
@@ -112,5 +116,77 @@ export async function login(req, res, next) {
         next(error)
     }
 };
-
-
+// //getStartById
+export async function getApiUser(req, res, next) {
+    const userId = req.user.id;
+    try {
+      const AllStart = await UserCareer.findAll({
+        where: { user_id: userId },
+        include: [
+          {
+            model: User,
+            as: 'user'
+          },
+          {
+            model: Career,
+            as: 'career'
+          }
+          
+        ]
+      });
+      // Lấy thông tin của người dùng từ bất kỳ bản ghi nào trong AllStart
+      const userInformation = {
+        id: AllStart.length > 0 ? AllStart[0].user.id : null,
+        email: AllStart.length > 0 ? AllStart[0].user.email : null,
+        fullname: AllStart.length > 0 ? AllStart[0].user.fullname : null,
+        gender: AllStart.length > 0 ? AllStart[0].user.gender : null,
+        nickName: AllStart.length > 0 ? AllStart[0].user.nickName : null,
+        isAdmin: AllStart.length > 0 ? AllStart[0].user.isAdmin : null,
+        stars: AllStart.length > 0 ? AllStart[0].user.stars : null,
+        coin: AllStart.length > 0 ? AllStart[0].user.coin : null,
+        level: AllStart.length > 0 ? AllStart[0].user.level : null,
+        updatedAt: AllStart.length > 0 ? AllStart[0].user.updatedAt : null,
+        createdAt: AllStart.length > 0 ? AllStart[0].user.createdAt : null
+      };
+      // Biến đổi dữ liệu để hiển thị userId 1 lần và danh sách career
+      const result = {
+        user: userInformation,
+        careers: AllStart.map((start) => ({
+          career_id: start.career.id,
+          name: start.career.name,
+          logo: start.career.logo,
+          description: start.career.description,
+          level:start.career.level,
+          createdAt: start.career.createdAt,
+          updatedAt: start.career.updatedAt
+        }))
+      };
+      return ReS(
+        res,
+        {
+          result
+        },
+        200
+      );
+    } catch (error) {
+      next(error);
+    }
+  };
+export async function getProfileUser(req, res, next) {
+    const userId = req.user.id;
+    try {
+        const AllStart = await User.findAll({
+            where: { id: userId }
+        });
+        // Lấy thông tin của người dùng từ bất kỳ bản ghi nào trong AllStart
+        return ReS(
+            res,
+            {
+                AllStart 
+            },
+            200
+        );
+    } catch (error) {
+        next(error);
+    }
+};

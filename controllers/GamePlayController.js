@@ -1,11 +1,32 @@
 import { QuestionsData } from '../Data/question.js';
 // import { questionSets } from '../Data/Design.js';
-
+import moment from "moment";
+import format from "format";
 const asyncHandler = require("express-async-handler");
-import { Question, Answer, Career,GameHistory } from "../models";
+import { Question, Answer, Career, GameHistory, User } from "../models";
 // import { getTranslate } from '../utils/translate';
 import { errorCode } from '../utils/util.helper';
 import { ReE, ReS } from '../utils/util.service';
+
+
+// export async function getApiTest(req, res, next) {
+//    try {
+//     const totalSeconds = 600; // Giá trị tổng thời gian trong giây
+//     const duration = moment.duration(totalSeconds, 'seconds'); // Tạo một khoảng thời gian
+//     // Lấy số phút và số giây từ khoảng thời gian
+//     const minutes = duration.minutes();
+//     const seconds = duration.seconds();
+
+//     // Định dạng thời gian thành mm:ss
+//     const formattedTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+//     res.json(formattedTime); // In ra 10:00
+//    } catch (error) {
+//     next(error);
+//    }
+// }
+
+
 //Create Question
 // exports.CreateQuestions = asyncHandler(async (req, res, next) => {
 //     try {
@@ -33,44 +54,7 @@ import { ReE, ReS } from '../utils/util.service';
 //                     careerId: CareerDoc.id,
 //                 },
 //             });
-            
-//             // Lấy câu hỏi vừa tạo để thêm các câu trả lời
-//             const questionId = createdQuestion.id;
 
-//             for (const answerData of questionData.answer) {
-//                 // Tạo câu trả lời
-//                 await Answer.findOrCreate({
-//                     where: { questionId, answer: answerData.answer },
-//                     defaults: { isCorrect: answerData.isCorrect },
-//                 });
-//             }
-//         }
-//         // Trả về thành công
-//         ReS(res, { message: "Questions created successfully" });
-//     } catch (error) {
-//         next(error);
-//     }
-// });
-
-//Create Question
-// exports.CreateQuestions = asyncHandler(async (req, res, next) => {
-//     try {
-//         const { name, logo, description } = req.body;
-//         const [CareerDoc, createdCareer] = await Career.findOrCreate({
-//             where: { name }, // Thêm điều kiện tìm kiếm
-//             defaults: { logo, description }, // Thêm dữ liệu mặc định nếu tạo mới
-//         });
-//         const { Design } = QuestionsData;
-//         for (const questionData of Design) {
-//             // Tạo câu hỏi
-//             const [createdQuestion] = await Question.findOrCreate({
-//                 where: { question: questionData.question },
-//                 defaults: {
-//                     explain: questionData.explain,
-//                     careerId: CareerDoc.id,
-//                     taskId:taskDoc.id
-//                 },
-//             });
 //             // Lấy câu hỏi vừa tạo để thêm các câu trả lời
 //             const questionId = createdQuestion.id;
 
@@ -96,7 +80,11 @@ exports.CreateQuestions = asyncHandler(async (req, res, next) => {
             defaults: { logo, description }, // Thêm dữ liệu mặc định nếu tạo mới
         });
         const { Design } = QuestionsData;
-
+        //xử lí thời gian
+        const timeStartForm = 10 * 60;
+        //Đinh dang thời gian với phút va giây
+        const formatTimeStart = moment(timeStartForm).format("mm:ss");
+        console.log(formatTimeStart); // In ra 30:00
         for (const questionData of Design) {
             // Tạo câu hỏi
             const [createdQuestion] = await Question.findOrCreate({
@@ -105,6 +93,8 @@ exports.CreateQuestions = asyncHandler(async (req, res, next) => {
                     explain: questionData.explain,
                     careerId: careerId, // Sử dụng careerId từ dữ liệu đầu vào
                     taskId: taskId, // Sử dụng taskId từ dữ liệu đầu vào
+                    startTime: new Date(), // Thời gian bắt đầu game
+                    endTime: new Date(Date.now() + 600000), // Thời gian kết thúc sau 10 phút
                 },
             });
 
@@ -126,6 +116,7 @@ exports.CreateQuestions = asyncHandler(async (req, res, next) => {
     }
 });
 
+// Endp
 //getAllQuestions
 exports.getAllQuestions = asyncHandler(async (req, res, next) => {
     try {
@@ -158,12 +149,19 @@ exports.getRamDomQuestion = async (req, res, next) => {
                 as: 'questions'
             }
         });
+
         // Lấy ngẫu nhiên 12 câu hỏi từ danh sách
         const randomQuestions = questionsList.sort(() => Math.random() - 0.5).slice(0, 12);
+
+        // Tạo ra một thời gian bắt đầu countdown từ 4 phút
+        const countdownStart = new Date();
+        countdownStart.setMinutes(countdownStart.getMinutes() + 4); // Thêm 4 phút
+
         return ReS(
             res,
             {
-                randomQuestions
+                randomQuestions,
+                countdownStart // Trả về thời gian bắt đầu countdown
             },
             200
         );
@@ -172,20 +170,33 @@ exports.getRamDomQuestion = async (req, res, next) => {
     }
 };
 
-//Save historyGame 
 exports.postHistoryGame = asyncHandler(async (req, res, next) => {
     try {
-    const {enegy,stars,coin } = req.body;
-    const gameHistoryDoc = await GameHistory.create({enegy,stars,coin});
-    return ReS(
-        res,
-        {
-            gameHistoryDoc
-        },
-        200
-    );
+        const { energy_spent, get_stars, get_coin } = req.body;
+        const userId = req.user.id; // Lấy userId từ req.user
+
+        // Tạo một bản ghi mới trong bảng GameHistory và lưu userId vào trường userId
+        const gameHistoryDoc = await GameHistory.create({ energy_spent, get_stars, get_coin, userId });
+
+        // Cộng dồn giá trị từ gameHistoryDoc vào các trường energy, stars, và coin của người dùng
+        const user = await User.findByPk(userId);
+        if (user) {
+            user.energy += energy_spent;
+            user.stars += get_stars;
+            user.coin += get_coin;
+
+            // Lưu lại thông tin người dùng
+            await user.save();
+        }
+
+        return ReS(
+            res,
+            {
+                gameHistoryDoc
+            },
+            200
+        );
     } catch (error) {
-      next(error);
+        next(error);
     }
-  
-  })
+});

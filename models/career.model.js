@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
             },
             description: {
                 type: DataTypes.STRING
+            },
+            level:{
+                type:DataTypes.INTEGER
+
             }
         },
         {

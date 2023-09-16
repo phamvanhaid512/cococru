@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       question: {
         type: DataTypes.TEXT
       },
-      time: {
-        type: DataTypes.INTEGER
-      },
       explain: {
         type: DataTypes.TEXT
+      },
+      timeStart:{
+        type:DataTypes.DATE //chỉ lấy phút và giây
       },
       careerId: {
         type: DataTypes.INTEGER,

@@ -36,15 +36,22 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true
 
             },
+            enegy: {
+                type: DataTypes.INTEGER,
+                allowNull: true
+            },
             stars: {
                 type: DataTypes.INTEGER,
                 allowNull: true
-
             },
             coin: {
                 type: DataTypes.INTEGER,
                 allowNull: true
 
+            },
+            level: {
+                type: DataTypes.INTEGER,
+                allowNull: true
             },
             updatedAt: {
                 type: DataTypes.DATE,
