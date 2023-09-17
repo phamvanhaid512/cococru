@@ -10,16 +10,22 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING
             },
             type: {
-                type: DataTypes.STRING
+                type: DataTypes.INTEGER
             },
             description:{
                 type: DataTypes.STRING
             },
+            timeStart:{
+                type:DataTypes.INTEGER
+            },
+            enegy_lost:{
+                type:DataTypes.INTEGER
+            },
+            enegy_get:{
+                type:DataTypes.INTEGER
+            },
             careerId: {
                 type: DataTypes.INTEGER,
-            },
-            timeStart: {
-                type:DataTypes.DATE
             }
         },
         {

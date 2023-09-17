@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       console.error("Error creating 'minigames' table:", error);
     });
   Model.associate = function (models) {
-    Model.hasMany(models.Answer, { foreignKey: 'questionId', as: 'questions' });
+    Model.hasMany(models.Answer, { foreignKey: 'questionId', as: 'answer' });
     Model.belongsTo(models.Task, { foreignKey: 'taskId', as: 'questionTask' });
   }
 

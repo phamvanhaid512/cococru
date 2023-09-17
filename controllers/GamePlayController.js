@@ -80,11 +80,6 @@ exports.CreateQuestions = asyncHandler(async (req, res, next) => {
             defaults: { logo, description }, // Thêm dữ liệu mặc định nếu tạo mới
         });
         const { Design } = QuestionsData;
-        //xử lí thời gian
-        const timeStartForm = 10 * 60;
-        //Đinh dang thời gian với phút va giây
-        const formatTimeStart = moment(timeStartForm).format("mm:ss");
-        console.log(formatTimeStart); // In ra 30:00
         for (const questionData of Design) {
             // Tạo câu hỏi
             const [createdQuestion] = await Question.findOrCreate({
@@ -93,8 +88,6 @@ exports.CreateQuestions = asyncHandler(async (req, res, next) => {
                     explain: questionData.explain,
                     careerId: careerId, // Sử dụng careerId từ dữ liệu đầu vào
                     taskId: taskId, // Sử dụng taskId từ dữ liệu đầu vào
-                    startTime: new Date(), // Thời gian bắt đầu game
-                    endTime: new Date(Date.now() + 600000), // Thời gian kết thúc sau 10 phút
                 },
             });
 
@@ -144,16 +137,19 @@ exports.getRamDomQuestion = async (req, res, next) => {
             where: {
                 taskId: taskId
             },
+            attributes: ['id', 'question', 'explain']
+            ,
             include: {
                 model: Answer,
-                as: 'questions'
+                as: 'answer'
+                , attributes: ['id', 'answer', 'isCorrect']
             }
         });
 
         // Lấy ngẫu nhiên 12 câu hỏi từ danh sách
         const randomQuestions = questionsList.sort(() => Math.random() - 0.5).slice(0, 12);
 
-        // Tạo ra một thời gian bắt đầu countdown từ 4 phút
+        // Tạo ra một thời gian bắt đầu cou'ntdown từ 4 phút
         const countdownStart = new Date();
         countdownStart.setMinutes(countdownStart.getMinutes() + 4); // Thêm 4 phút
 

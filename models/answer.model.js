@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             isCorrect: {
                 type: DataTypes.BOOLEAN
-            }, questionId: {
+            },questionId: {
                 type: DataTypes.INTEGER
             }
         },

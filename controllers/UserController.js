@@ -40,7 +40,7 @@ export async function signUp(req, res, next) {
             email,
             password: hashedPassword,
             isAdmin,
-            energy: 12,
+            enegy: 12,
             coin: 1000,
             stars: 0,
             level: 0
@@ -125,11 +125,15 @@ export async function getApiUser(req, res, next) {
         include: [
           {
             model: User,
-            as: 'user'
+            as: 'user',
+            attributes:['id','email','fullname','nickName','gender','coin','enegy']
+
           },
           {
             model: Career,
-            as: 'career'
+            as: 'career',
+            attributes:['id','level']
+
           }
           
         ]
@@ -144,6 +148,7 @@ export async function getApiUser(req, res, next) {
         isAdmin: AllStart.length > 0 ? AllStart[0].user.isAdmin : null,
         stars: AllStart.length > 0 ? AllStart[0].user.stars : null,
         coin: AllStart.length > 0 ? AllStart[0].user.coin : null,
+        enegy:AllStart.length > 0 ? AllStart[0].user.enegy : null,
         level: AllStart.length > 0 ? AllStart[0].user.level : null,
         updatedAt: AllStart.length > 0 ? AllStart[0].user.updatedAt : null,
         createdAt: AllStart.length > 0 ? AllStart[0].user.createdAt : null
@@ -176,7 +181,8 @@ export async function getProfileUser(req, res, next) {
     const userId = req.user.id;
     try {
         const AllStart = await User.findAll({
-            where: { id: userId }
+            where: { id: userId },
+            attributes:['id','email','fullname','nickName','gender','coin','enegy',]
         });
         // Lấy thông tin của người dùng từ bất kỳ bản ghi nào trong AllStart
         return ReS(

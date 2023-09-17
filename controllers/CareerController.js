@@ -8,7 +8,7 @@ import { ReE, ReS } from '../utils/util.service';
 exports.createCareer = asyncHandler(async (req, res, next) => {
   try {
     const { name, logo, description } = req.body;
-    const createCareer = await Career.create({ name, logo, description });
+    const createCareer = await Career.create({ name, logo, description,level:1 });
     console.log(createCareer);
     ReS(res, { message: "Career created successfully" });
   } catch (error) {
@@ -30,10 +30,10 @@ exports.createCareer = asyncHandler(async (req, res, next) => {
 exports.createTask = asyncHandler(async (req, res, next) => {
   try {
     const { name, logo, type, description, careerId } = req.body;
-    const createTask = await Task.create({ name, logo, type, description, careerId, timeStart: currentTime });
+    const createTask = await Task.create({ name, logo, type, description, careerId, timeStart:600,enegy_lost:4,enegy_get:2  });
     console.log(createTask);
 
-    ReS(res, { message: "Task created successfully", timeToCountdown });
+    ReS(res, { message: "Task created successfully"});
   } catch (error) {
     next(error);
   }
@@ -71,7 +71,7 @@ exports.createMinigame = asyncHandler(async (req, res, next) => {
 //   }
 // });
 // //getStartById
-exports.getAllCareer = asyncHandler(async (req, res, next) => {
+export async function getAllCareer (req, res, next) {
     const userId = req.user.id;
     try {
       const AllStart = await UserCareer.findAll({
@@ -79,7 +79,8 @@ exports.getAllCareer = asyncHandler(async (req, res, next) => {
         include: [
           {
             model: Career,
-            as: 'career'
+            as: 'career',
+            attributes:['id','name','logo','description','level']
          
           }
         ]
@@ -94,8 +95,7 @@ exports.getAllCareer = asyncHandler(async (req, res, next) => {
           name: start.career.name,
           logo: start.career.logo,
           description: start.career.description,
-          createdAt: start.career.createdAt,
-          updatedAt: start.career.updatedAt
+          level:start.career.level
         }))
       };
       return ReS(
@@ -108,64 +108,26 @@ exports.getAllCareer = asyncHandler(async (req, res, next) => {
     } catch (error) {
       next(error);
     }
-  });
+  };
 //getCareerById
-exports.getCareerById = asyncHandler(async (req, res, next) => {
+export async function getCareerById (req, res, next) {
   try {
     const careerId = req.params.careerId;
-    const careerById = await Career.findByPk(careerId);
-    return ReS(
-      res,
-      {
-        careerById
-      },
-      200
-    );
-  } catch (error) {
-    next(error)
-  }
-});
-//getTaskByCareerId -lấy chi tiết ngành nghề và danh sách tác vụ
-exports.getTaskByCareerId = asyncHandler(async (req, res, next) => {
-  try {
-    const careerId = req.params.careerId;
-    const AllTaskCareerById = await Career.findByPk(careerId, {
-      include: {
-        model: Task,
-        as: "relaCareer"
-      }
+    const careerById = await Career.findByPk(careerId, {
+      attributes: ['id', 'name', 'logo', 'description', 'level']
     });
-    if (!AllTaskCareerById) {
-      return res.status(404).json({ message: 'Không tìm thấy ngành nghề với ID đã cho.' });
+
+    if (!careerById) {
+      // Xử lý trường hợp không tìm thấy sự nghiệp
+      return ReS(res, { message: 'Không tìm thấy sự nghiệp' }, 404);
     }
-    return ReS(
-      res,
-      {
-        AllTaskCareerById
-      },
-      200
-    );
+
+    return ReS(res, { careerById }, 200);
   } catch (error) {
     next(error);
   }
-});
-//Lay chi tiết tác vụ 
-exports.getTaskById = asyncHandler(async (req, res, next) => {
-  try {
-    const taskId = req.params.taskId;
-    const TaskById = await Task.findByPk(taskId);
-    return ReS(
-      res,
-      {
-        TaskById
-      },
-      200
-    );
-  } catch (error) {
-    next(error);
-  }
-});
-exports.getTasksByCareer = async (req, res, next) => {
+};
+export async function getTasksByCareer (req, res, next) {
   try {
     const careerId = req.params.careerId;
 
@@ -173,6 +135,8 @@ exports.getTasksByCareer = async (req, res, next) => {
       where: {
         careerId: careerId,
       },
+      attributes:['id','name','logo','type','description','timeStart','enegy_lost','enegy_get']
+
     });
     if (tasksByCareer.length === 0) {
       return res.status(404).json({ message: 'Không tìm thấy tác vụ cho ngành nghề đã cho.' });
@@ -188,3 +152,25 @@ exports.getTasksByCareer = async (req, res, next) => {
     next(error);
   }
 };
+
+//getTaskByCareerId -lấy chi tiết ngành nghề và danh sách tác vụ
+exports.getTaskById = asyncHandler(async (req, res, next) => {
+  try {
+    const taskId = req.params.taskId;
+    const TaskById = await Task.findByPk(taskId,
+      {
+        attributes:['id','name','logo','type','description','timeStart','enegy_lost','enegy_get']
+
+      }
+      );
+    return ReS(
+      res,
+      {
+        TaskById
+      },
+      200
+    );
+  } catch (error) {
+    next(error);
+  }
+});
