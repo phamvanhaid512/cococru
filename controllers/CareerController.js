@@ -80,7 +80,7 @@ export async function getAllCareer (req, res, next) {
           {
             model: Career,
             as: 'career',
-            attributes:['id','name','logo','description','level']
+            attributes:['id','name','logo','description']
          
           }
         ]
@@ -94,8 +94,7 @@ export async function getAllCareer (req, res, next) {
           career_id: start.career.id,
           name: start.career.name,
           logo: start.career.logo,
-          description: start.career.description,
-          level:start.career.level
+          description: start.career.description
         }))
       };
       return ReS(
@@ -114,7 +113,7 @@ export async function getCareerById (req, res, next) {
   try {
     const careerId = req.params.careerId;
     const careerById = await Career.findByPk(careerId, {
-      attributes: ['id', 'name', 'logo', 'description', 'level']
+      attributes: ['id', 'name', 'logo', 'description']
     });
 
     if (!careerById) {
