@@ -29,7 +29,9 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         {
-            tableName: 'tasks'
+            tableName: 'tasks',
+            autoIncrement: true, // Tự động tạo auto-increment ID
+            autoIncrementIdentity: '1,1' // Cấu hình auto_increment_increment và auto_increment_offset
         }
     );
     sequelize.sync()

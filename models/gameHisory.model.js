@@ -30,7 +30,9 @@ module.exports = (sequelize, DataTypes) => {
         }
     },
         {
-            tableName: 'gameHistory'
+            tableName: 'gameHistory',
+            autoIncrement: true, // Tự động tạo auto-increment ID
+            autoIncrementIdentity: '1,1' // Cấu hình auto_increment_increment và auto_increment_offset
         }
     );
     Model.associate = function (models) {
