@@ -63,7 +63,6 @@ export async function signUp(req, res, next) {
                 id: user.id,
                 fullName: user.fullname,
                 email: user.email,
-                password: user.password,
                 isAdmin: user.isAdmin,
                 token: generateToken(user.id),
             });
