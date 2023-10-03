@@ -1,7 +1,10 @@
 import express from 'express';
 import { db_name, host, port as _port } from './config/config';
 import config from 'dotenv';
+require('./passport');
 import UserRouter from './routes/UserRoutes.js';
+import AppError from './utils/appError';
+
 // import QuestionRouter from './routes/QuestionsRoutes.js';
 import GamePlayRouter from './routes/GamePlayRoutes.js';
 import CareerRouter from './routes/CareerRoutes.js';

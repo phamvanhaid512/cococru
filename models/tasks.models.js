@@ -12,20 +12,25 @@ module.exports = (sequelize, DataTypes) => {
             type: {
                 type: DataTypes.INTEGER
             },
-            description:{
+            description: {
                 type: DataTypes.STRING
             },
-            timeStart:{
-                type:DataTypes.INTEGER
+            timeStart: {
+                type: DataTypes.INTEGER
             },
-            enegy_lost:{
-                type:DataTypes.INTEGER
+            coin: {
+                type: DataTypes.INTEGER
             },
-            enegy_get:{
-                type:DataTypes.INTEGER
+            enegy_lost: {
+                type: DataTypes.INTEGER
+            },
+            enegy_get: {
+                type: DataTypes.INTEGER
             },
             careerId: {
                 type: DataTypes.INTEGER,
+            },user_id:{
+                type:DataTypes.INTEGER
             }
         },
         {
@@ -44,6 +49,8 @@ module.exports = (sequelize, DataTypes) => {
     Model.associate = function (models) {
         Model.belongsTo(models.Career, { foreignKey: 'careerId', as: 'task' });
         Model.hasMany(models.Question, { foreignKey: 'taskId', as: 'taskQuestion' });
+        Model.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+
     }
     return Model;
 };

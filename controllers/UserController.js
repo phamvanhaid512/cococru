@@ -115,6 +115,9 @@ export async function login(req, res, next) {
         next(error)
     }
 };
+export async function loginGoogle(req,res,next) {
+res.json("Da chay den day");
+};
 // //getStartById
 export async function getApiUser(req, res, next) {
     const userId = req.user.id;

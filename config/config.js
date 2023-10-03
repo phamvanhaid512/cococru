@@ -17,16 +17,16 @@ CONFIG.jwt_expires_in = process.env.JWT_EXPIRES_IN || '30d';
 CONFIG.jwt_secret = process.env.JWT_SECRET || 'CoCo2021';;
 
 // CONFIG SESSION ID FOR END USER MESSAGE
-// CONFIG.jwt_secret_session = process.env.JWT_SECRET_SESSION || 'SessionForEndUser';
-// CONFIG.jwt_secret_session_expires_in = process.env.JWT_SECRET_SESSION_EXPIRES_IN || '1d';
+CONFIG.jwt_secret_session = process.env.JWT_SECRET_SESSION || 'SessionForEndUser';
+CONFIG.jwt_secret_session_expires_in = process.env.JWT_SECRET_SESSION_EXPIRES_IN || '1d';
 
-// CONFIG.host_ui = process.env.HOST_UI || 'http://localhost:3002';
+CONFIG.host_ui = process.env.HOST_UI || 'http://localhost:3002';
 
-// CONFIG.swipe_number = process.env.SWIPE_NUMBER || 10;
+CONFIG.swipe_number = process.env.SWIPE_NUMBER || 10;
 
-// CONFIG.facebook_app_id = process.env.FACEBOOK_APP_ID;
-// CONFIG.facebook_app_secret = process.env.FACEBOOK_APP_SECRET;
-// CONFIG.google_client_id = process.env.GOOGLE_CLIENT_ID;
-// CONFIG.google_client_secret = process.env.GOOGLE_CLIENT_SECRET;
+CONFIG.facebook_app_id = process.env.FACEBOOK_APP_ID;
+CONFIG.facebook_app_secret = process.env.FACEBOOK_APP_SECRET;
+CONFIG.google_client_id = process.env.GOOGLE_CLIENT_ID;
+CONFIG.google_client_secret = process.env.GOOGLE_CLIENT_SECRET;
 
 module.exports = CONFIG;
