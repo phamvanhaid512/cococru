@@ -1,7 +1,7 @@
 const { QuestionsData } = require('../Data/Design.js');
 const asyncHandler = require("express-async-handler");
 import { user } from "../config/mailer";
-import { Career, Minigame, Task, GameHistory, UserCareer, User, UserTask } from "../models";
+import { Career, Minigame, Task, GameHistory, UserCareer, User} from "../models";
 import { errorCode } from '../utils/util.helper';
 import { ReE, ReS } from '../utils/util.service';
 
@@ -61,47 +61,13 @@ exports.createTask = asyncHandler(async (req, res, next) => {
 // });
 // //getStartById
 export async function getAllCareer(req, res, next) {
-  const userId = req.user.id;
+
   try {
-    const AllStart = await UserCareer.findAll({
-      where: { user_id: userId },
-      include: [
-        {
-          model: Career,
-          as: 'career',
-          attributes: ['id', 'name', 'logo', 'description']
-
-        }
-      ]
-    });
-    // Lấy thông tin của người dùng từ bất kỳ bản ghi nào trong AllStart
-    const tasks = await Task.findAll();
-    const TaskIdsToAdd = tasks.map(task => task.id);
-    
-    for (const taskId of TaskIdsToAdd) {
-      const [userTask, created] = await UserTask.findOrCreate({
-        where: {
-          user_id: userId,
-          task_id: taskId,
-        },
-      });
-    
-   
-    }
-    // Biến đổi dữ liệu để hiển thị userId 1 lần và danh sách career
-    const result = {
-
-      careers: AllStart.map((start) => ({
-        career_id: start.career.id,
-        name: start.career.name,
-        logo: start.career.logo,
-        description: start.career.description
-      }))
-    };
+    const AllStart = await Career.findAll();
     return ReS(
       res,
       {
-        result
+        AllStart
       },
       200
     );
@@ -129,28 +95,13 @@ export async function getCareerById(req, res, next) {
 };
 export async function getTasksByCareer(req, res, next) {
   try {
-    const user_id = req.user.id;
-
     const careerId = req.params.careerId;
-
     const tasksByCareer = await Task.findAll({
       where: {
         careerId: careerId,
-      
       },
-      attributes: ['id', 'name', 'logo', 'type', 'description', 'timeStart', 'enegy_lost', 'enegy_get']
-      ,include: [
-        {
-          model: User,
-          attributes: ['id', 'coin'],
-          as: 'user',
-          through: { attributes: [] },
-          where: { id: user_id }, // Đặt điều kiện ở đây
-        }
-      ]
+      attributes: ['id', 'name', 'logo', 'type', 'description', 'timeStart', 'enegy_lost', 'enegy_get','coin']
     });
-
-
     if (tasksByCareer.length === 0) {
       return res.status(404).json({ message: 'Không tìm thấy tác vụ cho ngành nghề đã cho.' });
     }
@@ -168,21 +119,10 @@ export async function getTasksByCareer(req, res, next) {
 // getTaskByCareerId -lấy chi tiết ngành nghề và danh sách tác vụ
 exports.getTaskById = asyncHandler(async (req, res, next) => {
   try {
-    const user_id = req.user.id;
-
     const taskId = req.params.taskId;
     const TaskById = await Task.findByPk(taskId,
       {
-        attributes: ['id', 'name', 'logo', 'type', 'description', 'timeStart', 'enegy_lost', 'enegy_get']
-        ,include: [
-          {
-            model: User,
-            attributes: ['id', 'coin'],
-            as: 'user',
-            through: { attributes: [] },
-            where: { id: user_id }, // Đặt điều kiện ở đây
-          }
-        ]
+        attributes: ['id', 'name', 'logo', 'type', 'description', 'timeStart', 'enegy_lost', 'enegy_get','coin']
       }
     );
     return ReS(
