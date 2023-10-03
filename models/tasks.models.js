@@ -29,8 +29,6 @@ module.exports = (sequelize, DataTypes) => {
             },
             careerId: {
                 type: DataTypes.INTEGER,
-            },user_id:{
-                type:DataTypes.INTEGER
             }
         },
         {
@@ -49,7 +47,13 @@ module.exports = (sequelize, DataTypes) => {
     Model.associate = function (models) {
         Model.belongsTo(models.Career, { foreignKey: 'careerId', as: 'task' });
         Model.hasMany(models.Question, { foreignKey: 'taskId', as: 'taskQuestion' });
-        Model.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+        Model.belongsToMany(models.User, {
+            through: 'UserTask',
+            foreignKey: 'task_id',
+            other_key: 'user_id',
+            as: 'user',
+            attributes: []
+        });
 
     }
     return Model;

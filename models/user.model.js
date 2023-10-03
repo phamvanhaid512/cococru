@@ -73,7 +73,13 @@ module.exports = (sequelize, DataTypes) => {
             attributes: []
         });
         Model.hasMany(models.GameHistory, { foreignKey: 'userId', as: 'history' });
-        Model.hasMany(models.Task, { foreignKey: 'user_id', as: 'userTask' });
+        Model.belongsToMany(models.Task, {
+            through: 'UserTask',
+            foreignKey: 'user_id',
+            otherKey: 'task_id',
+            as: 'task',
+            attributes: []
+        });
 
     }
     return Model;

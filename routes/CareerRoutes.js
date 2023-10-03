@@ -6,7 +6,6 @@ const router = express.Router();
 router.use(authController.protect);
 router.post("/createCareer",CareerController.createCareer);
 router.post("/createTask",CareerController.createTask);
-router.post("/createMinigame",CareerController.createMinigame);
 router.get("/getAllCareer",CareerController.getAllCareer);
 router.get("/getCareerById/:careerId",CareerController.getCareerById);
 router.get("/getTasksByCareer/:careerId",CareerController.getTasksByCareer);

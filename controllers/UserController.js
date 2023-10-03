@@ -6,7 +6,7 @@ import { sendMail } from '../lib/email';
 import jwt from 'jsonwebtoken';
 import bcrypt from "bcryptjs";
 const asyncHandler = require("express-async-handler");
-import { User, Career, UserCareer } from '../models';
+import { User, Career, UserCareer,Task } from '../models';
 import { errorCode } from '../utils/util.helper';
 
 //Đăng kí
@@ -48,7 +48,15 @@ export async function signUp(req, res, next) {
         //if user create succufully 
         if (user) {
             // Lấy danh sách careerId từ bảng Career
+            res.status(201).json({
+                id: user.id,
+                fullName: user.fullname,
+                email: user.email,
+                isAdmin: user.isAdmin,
+                token: generateToken(user.id),
+            });
             const careers = await Career.findAll();
+            console.log(careers);
             // Lấy mảng các careerId từ danh sách careers
             const careerIdsToAdd = careers.map(career => career.id);
             // const UserCareerDoc = await UserCareer.findAll();
@@ -59,13 +67,8 @@ export async function signUp(req, res, next) {
                     career_id: careerId
                 });
             }
-            res.status(201).json({
-                id: user.id,
-                fullName: user.fullname,
-                email: user.email,
-                isAdmin: user.isAdmin,
-                token: generateToken(user.id),
-            });
+
+          
 
         } else {
             return ReE(res, 'Invalid user data', 404, errorCode.DataNull);

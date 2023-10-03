@@ -4,29 +4,8 @@ import moment from "moment";
 import format from "format";
 const asyncHandler = require("express-async-handler");
 import { Question, Answer, Career, GameHistory, User } from "../models";
-// import { getTranslate } from '../utils/translate';
 import { errorCode } from '../utils/util.helper';
 import { ReE, ReS } from '../utils/util.service';
-
-
-// export async function getApiTest(req, res, next) {
-//    try {
-//     const totalSeconds = 600; // Giá trị tổng thời gian trong giây
-//     const duration = moment.duration(totalSeconds, 'seconds'); // Tạo một khoảng thời gian
-//     // Lấy số phút và số giây từ khoảng thời gian
-//     const minutes = duration.minutes();
-//     const seconds = duration.seconds();
-
-//     // Định dạng thời gian thành mm:ss
-//     const formattedTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-
-//     res.json(formattedTime); // In ra 10:00
-//    } catch (error) {
-//     next(error);
-//    }
-// }
-
-
 //Create Question
 // exports.CreateQuestions = asyncHandler(async (req, res, next) => {
 //     try {
