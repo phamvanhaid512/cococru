@@ -1,6 +1,6 @@
 const { QuestionsData } = require('../Data/Design.js');
 const asyncHandler = require("express-async-handler");
-import { Career, Minigame, Task, GameHistory, UserCareer, User, UserTask } from "../models";
+import { Career, Minigame, Task, GameHistory, UserCareer, User } from "../models";
 import { errorCode } from '../utils/util.helper';
 import { ReE, ReS } from '../utils/util.service';
 
@@ -158,32 +158,6 @@ export async function getTasksByCareer(req, res, next) {
     next(error);
   }
 };
-// export async function getTasksByCareer (req, res, next) {
-//   try {
-//     const careerId = req.params.careerId;
-
-//     const tasksByCareer = await Task.findAll({
-//       where: {
-//         careerId: careerId,
-//       },
-//       attributes:['id','name','logo','type','description','timeStart','enegy_lost','enegy_get']
-
-//     });
-//     if (tasksByCareer.length === 0) {
-//       return res.status(404).json({ message: 'Không tìm thấy tác vụ cho ngành nghề đã cho.' });
-//     }
-//     return ReS(
-//       res,
-//       {
-//         tasksByCareer
-//       },
-//       200
-//     );
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
 // getTaskByCareerId -lấy chi tiết ngành nghề và danh sách tác vụ
 exports.getTaskById = asyncHandler(async (req, res, next) => {
   try {
