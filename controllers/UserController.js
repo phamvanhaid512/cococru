@@ -197,7 +197,8 @@ export async function getApiUser(req, res, next) {
                 },
                 {
                     model: Career,
-                    as: "career"
+                    as: "career",
+                  
                 },
             ],
         });
@@ -209,7 +210,6 @@ export async function getApiUser(req, res, next) {
             const userId = item.user.id;
             if (!userCareersMap.has(userId)) {
                 userCareersMap.set(userId, {
-                    level: item.level, // Sử dụng item.level để lấy level từ UserCareer
                     user: {
                         id: item.user.id,
                         email: item.user.email,
@@ -223,10 +223,13 @@ export async function getApiUser(req, res, next) {
                 });
             }
             userCareersMap.get(userId).careers.push({
-                id: item.career.id,
-                name: item.career.name,
-                logo: item.career.logo,
-                description: item.career.description           
+                // id: item.career.id,
+                // name: item.career.name,
+                // logo: item.career.logo,
+                // description: item.career.description ,  
+                career_id: item.career.id,
+                level: item.level, // Sử dụng item.level để lấy level từ UserCareer
+
             });
         });
         
