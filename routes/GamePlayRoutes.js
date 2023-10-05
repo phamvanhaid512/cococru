@@ -7,5 +7,7 @@ router.post("/createQuestion", GamePlayController.CreateQuestions);
 router.get("/getAllQuestion", GamePlayController.getAllQuestions);
 router.get("/getRamDomQuestion/:taskId", GamePlayController.getRamDomQuestion);
 //historyGame
+router.get("/getGameHistory", GamePlayController.getGameHistory);
+
 router.post("/postHistoryGame", GamePlayController.postHistoryGame);
 module.exports = router;

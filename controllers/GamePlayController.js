@@ -111,7 +111,6 @@ exports.getRamDomQuestion = async (req, res, next) => {
     try {
         // Lấy ngẫu nhiên 12 câu hỏi dựa trên khóa ngoại "careerId" cụ thể (ví dụ: careerId = 1)
         const taskId = req.params.taskId; // Thay đổi giá trị careerId theo nhu cầu của bạn
-
         const questionsList = await Question.findAll({
             where: {
                 taskId: taskId
@@ -144,21 +143,41 @@ exports.getRamDomQuestion = async (req, res, next) => {
         next(error);
     }
 };
+export async function getGameHistory(req, res, next) {
+    try {
+        const userId = req.user.id;
+        const gameHistory = await GameHistory.findAll({
+            where: { userId: userId }
+            // Thêm các thuộc tính/điều kiện truy vấn tại đây nếu cần
+        });
+
+        return ReS(
+            res,
+            {
+                gameHistory
+            },
+            200
+        );
+    } catch (error) {
+        next(error);
+    }
+}
 
 exports.postHistoryGame = asyncHandler(async (req, res, next) => {
     try {
-        const { energy_spent, get_stars, get_coin } = req.body;
+        const { enegy_get, enegy_lost, stars_get, coin_get} = req.body;
         const userId = req.user.id; // Lấy userId từ req.user
 
         // Tạo một bản ghi mới trong bảng GameHistory và lưu userId vào trường userId
-        const gameHistoryDoc = await GameHistory.create({ energy_spent, get_stars, get_coin, userId });
+        const gameHistoryDoc = await GameHistory.create({ enegy_get, enegy_lost, stars_get, coin_get,userId });
 
         // Cộng dồn giá trị từ gameHistoryDoc vào các trường energy, stars, và coin của người dùng
         const user = await User.findByPk(userId);
         if (user) {
-            user.energy += energy_spent;
-            user.stars += get_stars;
-            user.coin += get_coin;
+            user.enegy += enegy_get;
+            user.enegy += enegy_lost;
+            user.stars +=stars_get;
+            user.coin += coin_get;
 
             // Lưu lại thông tin người dùng
             await user.save();

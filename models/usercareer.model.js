@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
             career_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true
+            },
+            level:{
+                type:DataTypes.INTEGER
             }
         },
         {

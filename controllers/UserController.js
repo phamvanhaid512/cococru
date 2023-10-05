@@ -64,7 +64,8 @@ export async function signUp(req, res, next) {
             for (const careerId of careerIdsToAdd) {
                 await UserCareer.create({
                     user_id: user.id,  // Giả định user.id là ID của người dùng vừa tạo
-                    career_id: careerId
+                    career_id: careerId,
+                    level:1
                 });
             }
 
@@ -122,72 +123,136 @@ export async function loginGoogle(req,res,next) {
 res.json("Da chay den day");
 };
 // //getStartById
+// export async function getApiUser(req, res, next) {
+//     const userId = req.user.id;
+//     try {
+//       const AllStart = await UserCareer.findAll({
+//         where: { user_id: userId },
+//         attributes:['level'],
+//         include: [
+//           {
+//             model: User,
+//             as: 'user',
+//             attributes:['id','email','fullname','nickName','gender','coin','enegy']
+
+//           },
+//           {
+//             model: Career,
+//             as: 'career',
+//             attributes:['id']
+//           }
+          
+//         ]
+//       });
+//       // Lấy thông tin của người dùng từ bất kỳ bản ghi nào trong AllStart
+//       const userInformation = {
+//         id: AllStart.length > 0 ? AllStart[0].user.id : null,
+//         email: AllStart.length > 0 ? AllStart[0].user.email : null,
+//         fullname: AllStart.length > 0 ? AllStart[0].user.fullname : null,
+//         gender: AllStart.length > 0 ? AllStart[0].user.gender : null,
+//         nickName: AllStart.length > 0 ? AllStart[0].user.nickName : null,
+//         isAdmin: AllStart.length > 0 ? AllStart[0].user.isAdmin : null,
+//         stars: AllStart.length > 0 ? AllStart[0].user.stars : null,
+//         coin: AllStart.length > 0 ? AllStart[0].user.coin : null,
+//         enegy:AllStart.length > 0 ? AllStart[0].user.enegy : null,
+//         level: AllStart.length > 0 ? AllStart[0].user.level : null,
+//         updatedAt: AllStart.length > 0 ? AllStart[0].user.updatedAt : null,
+//         createdAt: AllStart.length > 0 ? AllStart[0].user.createdAt : null
+//       };
+//       // Biến đổi dữ liệu để hiển thị userId 1 lần và danh sách career
+//       const result = {
+//         user: userInformation,
+//         careers: AllStart.map((start) => ({
+//           career_id: start.career.id,
+//           name: start.career.name,
+//           logo: start.career.logo,
+//           description: start.career.description,
+//           level:start.career.level,
+//           createdAt: start.career.createdAt,
+//           updatedAt: start.career.updatedAt
+//         }))
+//       };
+//       return ReS(
+//         res,
+//         {
+//           result
+//         },
+//         200
+//       );
+//     } catch (error) {
+//       next(error);
+//     }
+//   };
 export async function getApiUser(req, res, next) {
     const userId = req.user.id;
     try {
-      const AllStart = await UserCareer.findAll({
-        where: { user_id: userId },
-        include: [
-          {
-            model: User,
-            as: 'user',
-            attributes:['id','email','fullname','nickName','gender','coin','enegy']
-
-          },
-          {
-            model: Career,
-            as: 'career',
-            attributes:['id','level']
-
-          }
-          
-        ]
-      });
-      // Lấy thông tin của người dùng từ bất kỳ bản ghi nào trong AllStart
-      const userInformation = {
-        id: AllStart.length > 0 ? AllStart[0].user.id : null,
-        email: AllStart.length > 0 ? AllStart[0].user.email : null,
-        fullname: AllStart.length > 0 ? AllStart[0].user.fullname : null,
-        gender: AllStart.length > 0 ? AllStart[0].user.gender : null,
-        nickName: AllStart.length > 0 ? AllStart[0].user.nickName : null,
-        isAdmin: AllStart.length > 0 ? AllStart[0].user.isAdmin : null,
-        stars: AllStart.length > 0 ? AllStart[0].user.stars : null,
-        coin: AllStart.length > 0 ? AllStart[0].user.coin : null,
-        enegy:AllStart.length > 0 ? AllStart[0].user.enegy : null,
-        level: AllStart.length > 0 ? AllStart[0].user.level : null,
-        updatedAt: AllStart.length > 0 ? AllStart[0].user.updatedAt : null,
-        createdAt: AllStart.length > 0 ? AllStart[0].user.createdAt : null
-      };
-      // Biến đổi dữ liệu để hiển thị userId 1 lần và danh sách career
-      const result = {
-        user: userInformation,
-        careers: AllStart.map((start) => ({
-          career_id: start.career.id,
-          name: start.career.name,
-          logo: start.career.logo,
-          description: start.career.description,
-          level:start.career.level,
-          createdAt: start.career.createdAt,
-          updatedAt: start.career.updatedAt
-        }))
-      };
-      return ReS(
-        res,
-        {
-          result
-        },
-        200
-      );
+        const userCareer = await UserCareer.findAll({
+            where: { user_id: userId },
+            attributes: ['level'], // Bổ sung thuộc tính 'level' để lấy dữ liệu level từ UserCareer
+            include: [
+                {
+                    model: User,
+                    as: "user",
+                    attributes: ['id', 'email', 'fullname', 'nickName', 'gender', 'coin', 'enegy']
+                },
+                {
+                    model: Career,
+                    as: "career"
+                },
+            ],
+        });
+        
+        // Nhóm dữ liệu theo user_id và tạo danh sách careers cho mỗi user
+        const userCareersMap = new Map();
+        
+        userCareer.forEach((item) => {
+            const userId = item.user.id;
+            if (!userCareersMap.has(userId)) {
+                userCareersMap.set(userId, {
+                    level: item.level, // Sử dụng item.level để lấy level từ UserCareer
+                    user: {
+                        id: item.user.id,
+                        email: item.user.email,
+                        fullname: item.user.fullname,
+                        nickName: item.user.nickName,
+                        gender: item.user.gender,
+                        coin: item.user.coin,
+                        enegy: item.user.enegy
+                    },
+                    careers: []
+                });
+            }
+            userCareersMap.get(userId).careers.push({
+                id: item.career.id,
+                name: item.career.name,
+                logo: item.career.logo,
+                description: item.career.description           
+            });
+        });
+        
+        const result = Array.from(userCareersMap.values());
+        
+        return ReS(
+            res,
+            {
+                userCareer: result
+            },
+            200
+        );
+        
     } catch (error) {
       next(error);
     }
-  };
+}
+
+
 export async function getProfileUser(req, res, next) {
     const userId = req.user.id;
     try {
         const AllStart = await User.findAll({
             where: { id: userId },
-            attributes:['id','email','fullname','nickName','gender','coin','enegy',]
+            attributes:['id','email','fullname','nickName','gender','coin','enegy',],
+        
         });
         // Lấy thông tin của người dùng từ bất kỳ bản ghi nào trong AllStart
         return ReS(
