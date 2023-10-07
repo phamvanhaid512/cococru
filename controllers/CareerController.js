@@ -1,22 +1,134 @@
+const fs = require('fs');
 const { QuestionsData } = require('../Data/Design.js');
 const asyncHandler = require("express-async-handler");
 import { user } from "../config/mailer";
-import { Career, Minigame, Task, GameHistory, UserCareer, User} from "../models";
+import { Career, Minigame, Task, GameHistory, UserCareer, User } from "../models";
 import { errorCode } from '../utils/util.helper';
 import { ReE, ReS } from '../utils/util.service';
-
+import { deleteFile } from '../lib/deletefile';
+import { createCareer } from '../dao/career.dao'
 //Create Career 
-exports.createCareer = asyncHandler(async (req, res, next) => {
+
+export const AddCareer = async (req, res, next) => {
+  const file = req.file;
+  const { name, description } = req.body;
+  if (name.length > 50) {
+    deleteCareerAfterFailure(file);
+    return ReE(res, 'Over limit', 403);
+  }
+  if (!file) {
+    deleteCareerAfterFailure(file);
+    return ReE(res,'Missing Data Field', 400);
+  }
   try {
-    const { name, logo, description } = req.body;
-    const createCareer = await Career.create({ name, logo, description, level: 1 });
-    console.log(createCareer);
-    ReS(res, { message: "Career created successfully" });
+    const createdCareer = await createCareer(name, file.filename, description );
+    if ( createdCareer)
+      return ReS(
+        res,
+        {
+          message: 'Create Bussiness successfully ',
+          direcotry: `public/careers/${file.filename}`,
+
+        },
+        200
+      );
+
   } catch (error) {
+    console.log("loi te le");
+    // nếu mà k thành công thì xóa hình.
+    if (file)   deleteCareerAfterFailure(file);
     next(error);
   }
-});
+}
+export const UpdateCareer = async (req, res, next) => {
+  const { id } = req.params;
+  const file = req.file;
+  const { name, description } = req.body;
+
+  if (name.length > 50) {
+    // Xử lý lỗi khi tên quá dài
+    deleteCareerAfterFailure(file);
+    return ReE(res, 'Over limit', 403);
+  }
+
+  if (!file && !name) {
+    // Xử lý lỗi khi thiếu dữ liệu
+    deleteCareerAfterFailure(file);
+    return ReE(res, 'Missing Data Field', 400);
+  }
+
+  try {
+    const careerToUpdate = await Career.findByPk(id);
+
+    if (!careerToUpdate) {
+      // Xử lý lỗi khi không tìm thấy career với ID tương ứng
+      return ReE(res, 'Career not found', 404);
+    }
+
+    if (file) {
+      // Nếu có file (logo), cập nhật logo
+      careerToUpdate.logo = `public/careers/${file.filename}`;
+    }
+
+    if (name) {
+      // Nếu có tên, cập nhật tên
+      careerToUpdate.name = name;
+    }
+
+    if (description) {
+      // Nếu có mô tả, cập nhật mô tả
+      careerToUpdate.description = description;
+    }
+
+    await careerToUpdate.save(); // Lưu thay đổi vào cơ sở dữ liệu
+
+    return ReS(res, {
+      message: 'Update Career successfully',
+      directory: `public/careers/${file.filename}`
+    }, 200);
+  } catch (error) {
+    console.log("loi te le");
+    // Xử lý lỗi và xóa hình (nếu có)
+    if (file) deleteCareerAfterFailure(file);
+    next(error);
+  }
+}
+
 //Create Task
+export const UpdateTask = async (req, res, next) => {
+  const { id } = req.params;
+  const file = req.file;
+
+  if (!file) {
+    // Xử lý lỗi khi không có file (logo)
+    return ReE(res, 'Missing Logo File', 400);
+  }
+
+  try {
+    const taskToUpdate = await Task.findByPk(id);
+
+    if (!taskToUpdate) {
+      // Xử lý lỗi khi không tìm thấy task với ID tương ứng
+      return ReE(res, 'Task not found', 404);
+    }
+
+    // Cập nhật logo của task
+    taskToUpdate.logo = `public/tasks/${file.filename}`;
+
+    await taskToUpdate.save(); // Lưu thay đổi vào cơ sở dữ liệu
+
+    return ReS(res, {
+      message: 'Update Task Logo successfully',
+      directory: `public/tasks/${file.filename}`
+    }, 200);
+  } catch (error) {
+    console.log("loi te le");
+    // Xử lý lỗi
+    next(error);
+  }
+}
+
+
 // exports.createTask = asyncHandler(async (req, res, next) => {
 //   try {
 //     const { name, logo, type, description, careerId,timeStart } = req.body;
@@ -100,7 +212,7 @@ export async function getTasksByCareer(req, res, next) {
       where: {
         careerId: careerId,
       },
-      attributes: ['id', 'name', 'logo', 'type', 'description', 'timeStart', 'enegy_lost', 'enegy_get','coin']
+      attributes: ['id', 'name', 'logo', 'type', 'description', 'timeStart', 'enegy_lost', 'enegy_get', 'coin']
     });
     if (tasksByCareer.length === 0) {
       return res.status(404).json({ message: 'Không tìm thấy tác vụ cho ngành nghề đã cho.' });
@@ -122,7 +234,7 @@ exports.getTaskById = asyncHandler(async (req, res, next) => {
     const taskId = req.params.taskId;
     const TaskById = await Task.findByPk(taskId,
       {
-        attributes: ['id', 'name', 'logo', 'type', 'description', 'timeStart', 'enegy_lost', 'enegy_get','coin']
+        attributes: ['id', 'name', 'logo', 'type', 'description', 'timeStart', 'enegy_lost', 'enegy_get', 'coin']
       }
     );
     return ReS(
@@ -136,3 +248,7 @@ exports.getTaskById = asyncHandler(async (req, res, next) => {
     next(error);
   }
 });
+const deleteCareerAfterFailure = (file) => {
+  let urlLogo = 'public/career/' + file.filename;
+  deleteFile(urlLogo);
+};
