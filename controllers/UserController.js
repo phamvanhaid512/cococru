@@ -20,7 +20,6 @@ const generateToken = (id) => {
         }
     );
 };
-
 export async function signUp(req, res, next) {
     const { fullname, email, password, isAdmin } = req.body;
     try {

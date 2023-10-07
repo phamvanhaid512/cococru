@@ -29,6 +29,7 @@ sequelize
 const port = _port;
 const app = express();
 app.use(express.json()); // Sử dụng express.json() để xử lý dữ liệu JSON
+app.use('/public', express.static('public'));
 app.get("/api/questions/", (req, res, next) => {
       res.json("test");
 });
