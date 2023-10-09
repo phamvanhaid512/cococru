@@ -175,7 +175,7 @@ exports.postHistoryGame = asyncHandler(async (req, res, next) => {
         const user = await User.findByPk(userId);
         if (user) {
             user.enegy += enegy_get;
-            user.enegy += enegy_lost;
+            user.enegy -= enegy_lost;
             user.stars +=stars_get;
             user.coin += coin_get;
 

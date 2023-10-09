@@ -750,7 +750,7 @@ module.exports.QuestionsData = {
         {
             id: 28,
             question: "Mục đích chính của thiết kế đa phương tiện là gì?",
-            explain: "Lossy là tính năng nén mất dữ liệu loại bỏ càng nhiều dữ liệu càng tốt để làm cho kích thước tệp càng nhỏ càng tốt. Dữ liệu được coi là ít đáng chú ý sẽ được loại bỏ để bản thân tệp vẫn phần lớn giống với bản gốc."
+            explain: ""
             , answer: [
                 {
                     id: 1,
@@ -777,7 +777,7 @@ module.exports.QuestionsData = {
         {
             id: 29,
             question: "Phần mềm nào sau đây thường được sử dụng trong thiết kế đa phương tiện?",
-            explain: "Lossy là tính năng nén mất dữ liệu loại bỏ càng nhiều dữ liệu càng tốt để làm cho kích thước tệp càng nhỏ càng tốt. Dữ liệu được coi là ít đáng chú ý sẽ được loại bỏ để bản thân tệp vẫn phần lớn giống với bản gốc."
+            explain: ""
             , answer: [
                 {
                     id: 1,
@@ -858,7 +858,7 @@ module.exports.QuestionsData = {
         {
             id: 32,
             question: "Những kỹ năng nào sau đây là cần thiết cho một multimedia designer?",
-            explain: "Thiết kế đồ họa đa phương tiện là sự kết hợp của âm thanh, hình ảnh động và ký tự văn bản."
+            explain: ""
             , answer: [
                 {
                     id: 1,
@@ -912,7 +912,7 @@ module.exports.QuestionsData = {
         {
             id: 34,
             question: "Điều nào sau đây là quan trọng trong thiết kế đa phương tiện?",
-            explain: "Typography là nghệ thuật sắp xếp các chữ cái, trình bày, hiển thị màu sắc, tạo phong cách cho chữ. Làm nổi bật, gửi gắm thông điệp, ý nghĩa ẩn trong chữ về sản phẩm và gây sự chú ý, tạo ấn tượng cho người dùng."
+            explain: ""
             , answer: [
                 {
                     id: 1,
@@ -1047,7 +1047,7 @@ module.exports.QuestionsData = {
         {
             id: 39,
             question: "Cái nào sau đây là một ví dụ về dự án thiết kế đa phương tiện?",
-            explain: "Animation được biết đến như nghệ thuật diễn hoạt hình ảnh trong các ấn phẩm quảng cáo; các trò chơi điện tử; phim ảnh, v.v."
+            explain: ""
             , answer: [
                 {
                     id: 1,
@@ -1101,7 +1101,7 @@ module.exports.QuestionsData = {
         {
             id: 41,
             question: "Wireframe là gì?",
-            explain: "Thiết kế UX tập trung vào trải nghiệm người dùng, trong khi thiết kế UI tập trung vào giao diện trực quan"
+            explain: ""
             , answer: [
                 {
                     id: 1,
@@ -1209,7 +1209,7 @@ module.exports.QuestionsData = {
         {
             id: 45,
             question: "Mục đích của Typography trong thiết kế tương tác là gì?",
-            explain: "A/B test quy trình mà trong đó hai phiên bản (A và B) sẽ được cùng so sánh trong một môi trường / tình huống được xác định và qua đó đánh giá xem phiên bản nào hiệu quả hơn."
+            explain: ""
             , answer: [
                 {
                     id: 1,
@@ -1263,7 +1263,7 @@ module.exports.QuestionsData = {
         {
             id: 47,
             question: "Thiết kế lấy người dùng làm trung tâm là:",
-            explain: "Style Guide là một tập hợp các tiêu chuẩn áp dụng cho việc tạo ra các văn bản hoặc thiết kế dựa trên tài sản cho một tổ chức, một ấn phẩm hoặc một lĩnh vực. Đảm bảo nội dung được sản xuất một cách nhất quán, phù hợp với mục tiêu của tổ chức, ấn phẩm hoặc lĩnh vực đó"
+            explain: ""
             , answer: [
                 {
                     id: 1,
@@ -1290,7 +1290,7 @@ module.exports.QuestionsData = {
         {
             id: 48,
             question: "Yếu tố thiết kế nào sau đây có thể nâng cao trải nghiệm người dùng?",
-            explain: "Style Guide là một tập hợp các tiêu chuẩn áp dụng cho việc tạo ra các văn bản hoặc thiết kế dựa trên tài sản cho một tổ chức, một ấn phẩm hoặc một lĩnh vực. Đảm bảo nội dung được sản xuất một cách nhất quán, phù hợp với mục tiêu của tổ chức, ấn phẩm hoặc lĩnh vực đó"
+            explain: ""
             , answer: [
                 {
                     id: 1,
@@ -1344,7 +1344,7 @@ module.exports.QuestionsData = {
         {
             id: 50,
             question: "Quá trình điều chỉnh màu sắc và độ tương phản để phục vụ một mục đích nghệ thuật được gọi là gì?",
-            explain: "Persona là một hình mẫu giả định, đại diện cho chân dung khách hàng lý tưởng của dự án"
+            explain: ""
             , answer: [
                 {
                     id: 1,
