@@ -89,7 +89,13 @@ export async function submitNickname(req, res, next) {
         );
         if (updatedUser) {
             // Xử lý thành công, ví dụ, trả về một phản hồi hoặc chuyển hướng đến trang khác
-            return ReE(res, 'Cập nhật nickname và gender thành công', 404, errorCode.DataNull);
+            return ReS(
+                res,
+                {
+                    message:"Cập nhật nickName thành công"
+                },
+                200
+            );
         } else {
             return ReE(res, 'Không thể cập nhật nickname và gender', 404, errorCode.DataNull);
         }
