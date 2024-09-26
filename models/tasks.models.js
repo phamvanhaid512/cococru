@@ -3,33 +3,18 @@ module.exports = (sequelize, DataTypes) => {
     var Model = sequelize.define(
         'Task',
         {
+            id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                primaryKey: true,
+                autoIncrement: true
+            },
             name: {
                 type: DataTypes.STRING
             },
             logo: {
                 type: DataTypes.STRING
             },
-            type: {
-                type: DataTypes.INTEGER
-            },
-            description: {
-                type: DataTypes.STRING
-            },
-            timeStart: {
-                type: DataTypes.INTEGER
-            },
-            coin: {
-                type: DataTypes.INTEGER
-            },
-            enegy_lost: {
-                type: DataTypes.INTEGER
-            },
-            enegy_get: {
-                type: DataTypes.INTEGER
-            },
-            careerId: {
-                type: DataTypes.INTEGER,
-            }
         },
         {
             tableName: 'tasks',
@@ -45,16 +30,14 @@ module.exports = (sequelize, DataTypes) => {
             console.error("Error creating 'tasks' table:", error);
         });
     Model.associate = function (models) {
-        Model.belongsTo(models.Career, { foreignKey: 'careerId', as: 'task' });
-        Model.hasMany(models.Question, { foreignKey: 'taskId', as: 'taskQuestion' });
-        Model.belongsToMany(models.User, {
-            through: 'UserTask',
-            foreignKey: 'task_id',
-            other_key: 'user_id',
-            as: 'user',
-            attributes: []
-        });
-
+        Model.hasMany(models.Minigame,{foreignKey:'taskId',as:'taskMini'})
+        Model.belongsToMany(models.TaskFeatures,{
+            through:'TaskFeatures',
+            foreignKey:'task_id',
+            otherKey:'features_id',
+            as:'taskFeatures',
+            attributes:[]
+        })
     }
     return Model;
 };

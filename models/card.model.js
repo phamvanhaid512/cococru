@@ -1,8 +1,7 @@
 const Sequelize = require("sequelize");
-import { User, Career } from "./index.js";
 module.exports = (sequelize, DataTypes) => {
     var Model = sequelize.define(
-        'UserCareer',
+        'Card',
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -10,27 +9,37 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 autoIncrement: true
             },
-            user_id: {
-                type: DataTypes.INTEGER,
-                primaryKey: true
+            cardName: {
+                type: DataTypes.STRING
             },
-            career_id: {
-                type: DataTypes.INTEGER,
-                primaryKey: true
+            description:{
+                type:DataTypes.STRING
             },
-            level:{
+            logoCard:{
+                type:DataTypes.STRING
+            },
+            isDisplay:{
+                type:DataTypes.BOOLEAN
+            },
+            gameCardId:{
                 type:DataTypes.INTEGER
             }
         },
         {
-            tableName: 'UserCareer',
+            tableName: 'card',
             autoIncrement: true, // Tự động tạo auto-increment ID
             autoIncrementIdentity: '1,1' // Cấu hình auto_increment_increment và auto_increment_offset
         }
     );
+    sequelize.sync()
+        .then(() => {
+            console.log("Table 'card' has been created.");
+        })
+        .catch((error) => {
+            console.error("Error creating 'card' table:", error);
+        });
     Model.associate = function (models) {
-        Model.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
-        Model.belongsTo(models.Career, { foreignKey: 'career_id', as: 'career' });
-    };
+        Model.belongsTo(models.GameCard, { foreignKey: 'gameCardId', as: 'card' });
+    }
     return Model;
-}
+};

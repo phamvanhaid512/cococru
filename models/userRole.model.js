@@ -1,8 +1,7 @@
 const Sequelize = require("sequelize");
-import { User, Career } from "./index.js";
 module.exports = (sequelize, DataTypes) => {
     var Model = sequelize.define(
-        'UserTask',
+        'UserRole',
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -14,20 +13,23 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
                 primaryKey: true
             },
-            task_id: {
+            role_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true
+            },
+            level:{
+                type:DataTypes.INTEGER
             }
         },
         {
-            tableName: 'UserTask',
+            tableName: 'UserRole',
             autoIncrement: true, // Tự động tạo auto-increment ID
             autoIncrementIdentity: '1,1' // Cấu hình auto_increment_increment và auto_increment_offset
         }
     );
     Model.associate = function (models) {
         Model.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
-        Model.belongsTo(models.Task, { foreignKey: 'task_id', as: 'task' });
+        Model.belongsTo(models.Role, { foreignKey: 'role_id', as: 'role' });
     };
     return Model;
 }

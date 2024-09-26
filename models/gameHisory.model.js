@@ -8,24 +8,16 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-        enegy_get:{
-            type:DataTypes.INTEGER,
-            allowNull: true
+        startTime:{
+            type:DataTypes.STRING
         },
-        enegy_lost:{
-            type:DataTypes.INTEGER,
-            allowNull: true
+        endTime:{
+            type:DataTypes.STRING
         },
-      stars_get:{
-            type: DataTypes.INTEGER,
-            allowNull: true
+        minigameId:{ 
+            type:DataTypes.INTEGER
         },
-       coin_get:{
-            type: DataTypes.INTEGER,
-            allowNull: true
-
-        }
-        ,userId: {
+        userId: {
             type: DataTypes.INTEGER
         }
     },

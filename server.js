@@ -7,7 +7,7 @@ import AppError from './utils/appError';
 
 // import QuestionRouter from './routes/QuestionsRoutes.js';
 import GamePlayRouter from './routes/GamePlayRoutes.js';
-import CareerRouter from './routes/CareerRoutes.js';
+import RoleRouter from './routes/RoleRoutes.js';
 import globalErrHandler from './controllers/errorController';
 import { sequelize } from './models';
 
@@ -38,7 +38,7 @@ app.get("/api/questions/", (req, res, next) => {
 //router
 app.use("/api/users/", UserRouter);
 app.use("/api/gamePlay/", GamePlayRouter);
-app.use("/api/careers/", CareerRouter);
+app.use("/api/role/", RoleRouter);
 //error handler
 // handle undefined Routes
 app.use('*', (req, res, next) => {

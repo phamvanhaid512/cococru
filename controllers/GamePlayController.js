@@ -3,7 +3,7 @@ import { QuestionsData } from '../Data/question.js';
 import moment from "moment";
 import format from "format";
 const asyncHandler = require("express-async-handler");
-import { Question, Answer, Career, GameHistory, User } from "../models";
+import { Question, Answer, Career, GameHistory, User,Minigame,Features } from "../models";
 import { errorCode } from '../utils/util.helper';
 import { ReE, ReS } from '../utils/util.service';
 //Create Question
@@ -51,6 +51,7 @@ import { ReE, ReS } from '../utils/util.service';
 //         next(error);
 //     }
 // });
+
 exports.CreateQuestions = asyncHandler(async (req, res, next) => {
     try {
         const { name, logo, description, careerId, taskId } = req.body; // Lấy careerId và taskId từ dữ liệu đầu vào
@@ -143,6 +144,48 @@ exports.getRamDomQuestion = async (req, res, next) => {
         next(error);
     }
 };
+export async function getAllMinigame (req,res,next) {
+    try {
+        const taskId = req.params.taskId;
+        const getAllMinigame = await Minigame.findAll({where:{taskId:taskId}});
+        return ReS(
+            res,{
+                getAllMinigame
+            },
+            200
+        )
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function getAllCurrentFeature(req,res,next) {
+    try {
+        const getAllFeatures = await  Features.findAll();
+        return ReS(
+            res,{
+                getAllFeatures
+            },
+            200
+        )
+    } catch (error) {
+        next(error)
+    }
+}
+export async function getMinigameById (req,res,next) {
+    try {
+        const minigameId = req.params.minigameId;
+        const getMiniGameById = await Minigame.findAll({where:{id:minigameId}})
+        return ReS(
+            res,{
+                getMiniGameById
+            },
+            200
+        )
+    } catch (error) {
+        next(error)
+    }
+}
 export async function getGameHistory(req, res, next) {
     try {
         const userId = req.user.id;
@@ -170,7 +213,7 @@ exports.postHistoryGame = asyncHandler(async (req, res, next) => {
 
         // Tạo một bản ghi mới trong bảng GameHistory và lưu userId vào trường userId
         const gameHistoryDoc = await GameHistory.create({ enegy_get, enegy_lost, stars_get, coin_get,userId });
-
+        
         // Cộng dồn giá trị từ gameHistoryDoc vào các trường energy, stars, và coin của người dùng
         const user = await User.findByPk(userId);
         if (user) {

@@ -65,11 +65,11 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
     Model.associate = function (models) {
-        Model.belongsToMany(models.Career, {
-            through: 'UserCareer',
+        Model.belongsToMany(models.Role, {
+            through: 'UserRole',
             foreignKey: 'user_id',
-            otherKey: 'career_id',
-            as: 'career',
+            otherKey: 'role_id',
+            as: 'role',
             attributes: []
         });
         Model.hasMany(models.GameHistory, { foreignKey: 'userId', as: 'history' });
@@ -80,6 +80,13 @@ module.exports = (sequelize, DataTypes) => {
             as: 'task',
             attributes: []
         });
+        Model.belongsToMany(models.Minigame,{
+            through:'UserMinigame',
+            foreignKey:'user_id',
+            otherKey:'minigame_id',
+            as:'userMinigame',
+            attributes:[]
+        })
 
     }
     return Model;
